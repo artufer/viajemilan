@@ -34,21 +34,23 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 8px;
             margin-bottom: 12px;
-            flex-wrap: wrap;
+            flex-wrap: nowrap;
+            overflow: hidden;
         }
         h1 {
-            font-size: clamp(20px, 5vw, 28px);
+            font-size: clamp(16px, 4.2vw, 28px);
             margin: 0;
             color: #1e3a8a;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
             text-align: center;
+            white-space: nowrap;
         }
         .flag {
-            width: 32px;
-            height: 22px;
+            width: 26px;
+            height: 18px;
             border-radius: 3px;
             box-shadow: 0 1px 3px rgba(0,0,0,0.2);
             flex-shrink: 0;
@@ -336,6 +338,10 @@
             .container {
                 padding: 30px;
             }
+            .flag {
+                width: 32px;
+                height: 22px;
+            }
             .countdown-wrapper {
                 flex-direction: row;
                 padding: 10px 18px;
@@ -477,9 +483,9 @@
                     </div>
                     <div class="trip-details" onclick="event.stopPropagation()">
                         <div class="passenger-selector">
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidaarturo.jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Arturo</button>
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidadaniel.jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Daniel</button>
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidapablo.jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Pablo</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Arturo</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Daniel</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vueloidaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/Terminal+T1+Salidas,+Barajas,+28042+Madrid/@40.4634788,-3.5736904,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231ce04720e83:0xe203b822a267a945!8m2!3d40.4634788!4d-3.5711155!16s%2Fg%2F11sg8glwwp?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Pablo</button>
                         </div>
                         <div class="actions-container">
                             <a href="#" class="action-icon-link btn-ver" target="_blank" onclick="abrirArchivoDesdeElement(this); return false;">
@@ -549,9 +555,9 @@
                     </div>
                     <div class="trip-details" onclick="event.stopPropagation()">
                         <div class="passenger-selector">
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltaarturo.jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Arturo</button>
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltadaniel.jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Daniel</button>
-                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltapablo.jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Pablo</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Arturo</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Daniel</button>
+                            <button class="passenger-btn" onclick="selectPassenger(this, 'vuelovueltaarturo (daniel o pablo).jpg', 'https://www.google.com/maps/place/MXP+T1+-+Partenze,+21010+Ferno+VA,+Italia/@45.627374,8.7099023,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x47866112ed84722d:0xc1ff827f6649fdd0!8m2!3d45.627374!4d8.7124772!16s%2Fg%2F11c0wlc5r5?entry=ttu&g_ep=EgoyMDI2MDcyOS4wIKXMDSoASAFQAw%3D%3D')">Pablo</button>
                         </div>
                         <div class="actions-container">
                             <a href="#" class="action-icon-link btn-ver" target="_blank" onclick="abrirArchivoDesdeElement(this); return false;">
@@ -726,4 +732,3 @@
     </script>
 </body>
 </html>
-```[cite: 1]
