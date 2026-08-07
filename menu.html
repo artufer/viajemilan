@@ -176,16 +176,20 @@
         
         .btn-row {
             display: flex;
-            gap: 6px;
-            margin-top: 12px;
-            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 10px;
+            width: 100%;
         }
         .btn-row .section-toggle-btn {
             margin-top: 0;
-            flex: 1 1 45%;
-            min-width: 130px;
-            font-size: 13px;
-            padding: 10px 6px;
+            flex: 1;
+            min-width: 0;
+            font-size: 11px;
+            padding: 8px 2px;
+            letter-spacing: -0.2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .collapsible-content {
@@ -383,6 +387,11 @@
         .btn-comida { background: #0284c7; }
         .btn-aperitivo { background: #7c3aed; }
         .btn-cena { background: #db2777; }
+
+        /* Botones de Planos y Urgencias */
+        .btn-mapa-ciudad { background: #0d9488; }
+        .btn-mapa-metro { background: #e11d48; }
+        .btn-emergencias { background: #475569; }
 
         /* Estilos generales para Modales tipo Pantalla Completa */
         .modal-gallery {
@@ -587,7 +596,7 @@
             background: #1d4ed8;
         }
 
-        /* Estilos unificados para modales de comida/aperitivo */
+        /* Estilos unificados para modales de comida/aperitivo/urgencias */
         .food-modal-body {
             background: #fff;
             border-radius: 10px;
@@ -683,9 +692,8 @@
                 grid-template-columns: repeat(2, 1fr);
             }
             .btn-row .section-toggle-btn {
-                flex: 1;
-                font-size: 16px;
-                padding: 12px 16px;
+                font-size: 15px;
+                padding: 12px 10px;
             }
         }
     </style>
@@ -977,8 +985,8 @@
 
         <!-- Botones en Línea Horizontal: Checklist y Frases -->
         <div class="btn-row">
-            <button class="section-toggle-btn btn-checklist" onclick="openModalGallery('checklist-modal')">Checklist de Ropa</button>
-            <button class="section-toggle-btn btn-phrases" onclick="openModalGallery('phrases-modal')">50 Frases Italiano</button>
+            <button class="section-toggle-btn btn-checklist" onclick="openModalGallery('checklist-modal')">Checklist Ropa</button>
+            <button class="section-toggle-btn btn-phrases" onclick="openModalGallery('phrases-modal')">Frases Italiano</button>
         </div>
 
         <!-- Fila Única con los 4 Botones de Comida en Orden: Desayuno, Comida, Aperitivo, Cena -->
@@ -987,6 +995,13 @@
             <button class="section-toggle-btn btn-comida" onclick="openModalGallery('pasta-modal')">Comida</button>
             <button class="section-toggle-btn btn-aperitivo" onclick="openModalGallery('aperitivo-modal')">Aperitivo</button>
             <button class="section-toggle-btn btn-cena" onclick="openModalGallery('cena-modal')">Cena</button>
+        </div>
+
+        <!-- Fila Extra: Planos (Ciudad y Metro) y Teléfonos de Urgencias -->
+        <div class="btn-row">
+            <button class="section-toggle-btn btn-mapa-ciudad" onclick="window.open('plano milan.jpg', '_blank')">Plano Ciudad</button>
+            <button class="section-toggle-btn btn-mapa-metro" onclick="window.open('metro milan.jpg', '_blank')">Plano Metro</button>
+            <button class="section-toggle-btn btn-emergencias" onclick="openModalGallery('urgencias-modal')">Urgencias</button>
         </div>
     </div>
 
@@ -1333,6 +1348,52 @@
                     </div>
                     <div class="food-info">
                         <strong>💶 Precios:</strong> Cocina milanesa tradicional para cenar (15€ – 25€).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Teléfonos de Urgencias -->
+    <div id="urgencias-modal" class="modal-gallery">
+        <div class="modal-content-wrapper">
+            <div class="modal-header-bar">
+                <div class="modal-title">Teléfonos de Urgencias</div>
+                <button type="button" class="close-modal-btn" onclick="closeModalGallery('urgencias-modal')">Cerrar ✕</button>
+            </div>
+            <div class="food-modal-body">
+                <div class="checklist-subtitle">Números esenciales de contacto rápido en caso de emergencia en Italia. Pulsa en el teléfono para llamar directamente.</div>
+                
+                <div class="food-card">
+                    <div class="food-title">Emergencias Generales (Unico)</div>
+                    <div class="food-info"><strong>ℹ️ Descripción:</strong> Policía, Ambulancia y Bomberos (Gratuito).</div>
+                    <div class="food-info">
+                        <strong>📞 Teléfono:</strong> 
+                        <a href="tel:112" class="action-icon-link" style="display:inline-flex; width:auto; padding:0;">112</a>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <div class="food-title">Consulado de España en Milán</div>
+                    <div class="food-info" onclick="event.stopPropagation()">
+                        <strong>📍 Dirección:</strong> 
+                        <a href="https://www.google.com/maps/place/Consulado+General+de+Espa%C3%B1a+en+Mil%C3%A1n/@45.4738098,9.1852293,2443m/data=!3m1!1e3!4m6!3m5!1s0x4786c6b6a4ed8a21:0xa928907397c5119f!8m2!3d45.4772302!4d9.1953997!16s%2Fg%2F1wg5wwz6?entry=ttu&g_ep=EgoyMDI2MDgwNC4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="action-icon-link" style="display:inline-flex; width:auto; padding:0;">Via Fatebenebrosch, 28, 20121 Milano</a>
+                    </div>
+                    <div class="food-info"><strong>ℹ️ Urgencia consular (24h solo emergencias graves):</strong> 
+                        <a href="tel:+39335282735" class="action-icon-link" style="display:inline-flex; width:auto; padding:0;">+39 335 282 735</a>
+                    </div>
+                    <div class="food-info">
+                        <strong>📞 Teléfono General:</strong> 
+                        <a href="tel:+39026328831" class="action-icon-link" style="display:inline-flex; width:auto; padding:0;">+39 02 6328831</a>
+                    </div>
+                </div>
+
+                <div class="food-card">
+                    <div class="food-title">Policía de Estado (Polizia di Stato)</div>
+                    <div class="food-info"><strong>ℹ️ Descripción:</strong> Denuncias por robo o pérdida de documentos.</div>
+                    <div class="food-info">
+                        <strong>📞 Teléfono:</strong> 
+                        <a href="tel:113" class="action-icon-link" style="display:inline-flex; width:auto; padding:0;">113</a>
                     </div>
                 </div>
             </div>
