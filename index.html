@@ -377,43 +377,111 @@
 
         .filter-info strong { color: #667eea; }
 
-        .train-message {
-            margin-top: 15px;
-            padding: 15px;
+        .train-info-container {
             background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
             border: 2px solid #fdcb6e;
-            border-radius: 10px;
-            font-size: 14px;
-            color: #2d3436;
-            text-align: center;
-            font-weight: 700;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
             box-shadow: 0 3px 10px rgba(253, 203, 110, 0.4);
-            display: none;
+            position: relative;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .train-info-container.pulse {
             animation: pulse 2s infinite;
         }
 
         @keyframes pulse {
             0%, 100% {
-                transform: scale(1);
                 box-shadow: 0 3px 10px rgba(253, 203, 110, 0.4);
             }
             50% {
-                transform: scale(1.02);
                 box-shadow: 0 5px 15px rgba(253, 203, 110, 0.6);
             }
         }
 
-        .train-message.show { display: block; }
-        
-        .train-schedule {
-            text-align: left;
-            font-size: 13px;
-            line-height: 1.6;
-            background: rgba(255,255,255,0.6);
+        .train-close-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
+
+        .train-close-btn:hover {
+            background: #c0392b;
+            transform: scale(1.1);
+        }
+
+        .train-message {
+            font-size: 14px;
+            color: #2d3436;
+            text-align: center;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .train-schedules-wrapper {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .train-schedule-box {
+            flex: 1;
+            background: rgba(255,255,255,0.7);
             padding: 12px;
             border-radius: 8px;
-            margin-top: 10px;
             font-weight: 600;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .train-schedule-box.ida {
+            border-left: 4px solid #27ae60;
+        }
+
+        .train-schedule-box.vuelta {
+            border-left: 4px solid #e74c3c;
+        }
+
+        .train-schedule-box strong {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 14px;
+        }
+
+        .train-schedule-box.ida strong {
+            color: #27ae60;
+        }
+
+        .train-schedule-box.vuelta strong {
+            color: #e74c3c;
         }
 
         .documents-grid {
@@ -1046,6 +1114,12 @@
             to { opacity: 0; transform: translateY(20px); }
         }
 
+        @media (max-width: 768px) {
+            .train-schedules-wrapper {
+                flex-direction: column;
+            }
+        }
+
         @media (max-width: 480px) {
             .countdown-item { min-width: 55px; padding: 6px 8px; }
             .countdown-number { font-size: 24px; }
@@ -1062,6 +1136,20 @@
             .weather-temp { font-size: 14px; }
             .phrase-search { font-size: 13px; padding: 10px; }
             .baggage-card { width: 160px; }
+            .train-close-btn {
+                width: 24px;
+                height: 24px;
+                font-size: 14px;
+                top: 5px;
+                right: 5px;
+            }
+            .train-message {
+                font-size: 13px;
+            }
+            .train-schedule-box {
+                font-size: 12px;
+                padding: 10px;
+            }
         }
 
         .hidden { display: none !important; }
@@ -1110,7 +1198,7 @@
 
     <div class="main-app" id="mainApp">
         <div class="header">
-            <h1>🇮🇹 Viaje a Milán Octubre 2026</h1>
+            <h1>🇮 Viaje a Milán Octubre 2026</h1>
             <div class="weather-display" id="weatherDisplay" onclick="openWeatherForecast()" title="Ver previsión de los próximos días">
                 <span class="weather-loading">🌡️ Cargando...</span>
             </div>
@@ -1140,16 +1228,40 @@
 
         <div class="nav-menu">
             <button class="nav-btn active" onclick="showSection('documents', this)">📄 Billetes</button>
-            <button class="nav-btn" onclick="openWebcam()">📹 Webcam</button>
+            <button class="nav-btn" onclick="openWebcam()"> Webcam</button>
             <button class="nav-btn" onclick="openFile('plano milan.jpg')">🗺️ Plano</button>
             <button class="nav-btn" onclick="openFile('mapa metro milan.jpg')">🚇 Metro</button>
             <button class="nav-btn" onclick="showSection('visitas', this)">🏛️ Visitas</button>
-            <button class="nav-btn" onclick="showSection('phrases', this)">💬 Frases</button>
+            <button class="nav-btn" onclick="showSection('phrases', this)"> Frases</button>
             <button class="nav-btn" onclick="showSection('checklist', this)">✅ Checklist</button>
         </div>
 
         <div class="content-section active" id="documents">
-            <h2 class="section-title">📄 Billetes y Documentos</h2>
+            <h2 class="section-title"> Billetes y Documentos</h2>
+            
+            <!-- Train Info Container -->
+            <div class="train-info-container pulse" id="trainInfoContainer" style="display: none;">
+                <button class="train-close-btn" onclick="closeTrainInfo()" title="Cerrar">×</button>
+                <div class="train-message">
+                    🚆 <strong>Nota:</strong> Los billetes se sacarán una vez llegados a Milán
+                </div>
+                <div class="train-schedules-wrapper">
+                    <div class="train-schedule-box ida">
+                        <strong> Ida</strong>
+                        📍 Salida: Malpensa T1<br>
+                         03/10/2026 a las <strong style="color: #27ae60;">12:41</strong><br>
+                        📍 Llegada: Milano Centrale<br>
+                        ⏰ <strong style="color: #e74c3c;">13:37</strong>
+                    </div>
+                    <div class="train-schedule-box vuelta">
+                        <strong>🚄 Vuelta</strong>
+                        📍 Salida: Milano Centrale<br>
+                        📅 05/10/2026 a las <strong style="color: #27ae60;">16:25</strong><br>
+                        📍 Llegada: Malpensa T1<br>
+                        ⏰ <strong style="color: #e74c3c;">17:18</strong>
+                    </div>
+                </div>
+            </div>
             
             <div class="filters-container">
                 <div class="filters-title">🔍 Filtrar Documentos</div>
@@ -1176,24 +1288,13 @@
                 <div class="filter-info" id="filterInfo">
                     Selecciona un viajero y tipo de transporte para ver los documentos
                 </div>
-                <div class="train-message" id="trainMessage">
-                    🚆 <strong>Nota:</strong> Los billetes se sacarán una vez llegados a Milán
-                    <div class="train-schedule">
-                        <strong>🚄 Ida:</strong><br>
-                        📍 Salida: Malpensa T1 (03/10/2026 a las 12:41)<br>
-                        📍 Llegada: Milano Centrale (13:37)<br><br>
-                        <strong>🚄 Vuelta:</strong><br>
-                        📍 Salida: Milano Centrale (05/10/2026 a las 16:25)<br>
-                        📍 Llegada: Malpensa T1 (17:18)
-                    </div>
-                </div>
             </div>
 
             <div class="documents-grid" id="documentsGrid"></div>
         </div>
 
         <div class="content-section" id="visitas">
-            <h2 class="section-title">🏛️ Visitas y Lugares</h2>
+            <h2 class="section-title">️ Visitas y Lugares</h2>
             
             <div class="visitas-container">
                 <div class="visitas-title">Selecciona el periodo</div>
@@ -1202,12 +1303,12 @@
                     <button class="visita-btn" onclick="showVisita('sabado-tarde')">🌅 SÁBADO TARDE</button>
                     <button class="visita-btn" onclick="showVisita('domingo-manana')">☀️ DOMINGO MAÑANA</button>
                     <button class="visita-btn" onclick="showVisita('domingo-tarde')">🌆 DOMINGO TARDE</button>
-                    <button class="visita-btn" onclick="showVisita('lunes-manana')">🌄 LUNES MAÑANA</button>
+                    <button class="visita-btn" onclick="showVisita('lunes-manana')"> LUNES MAÑANA</button>
                 </div>
 
                 <div class="visita-content" id="sabado-tarde">
                     <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
-                    <div class="visita-subtitle">🌅 Sábado Tarde</div>
+                    <div class="visita-subtitle"> Sábado Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('duomo milan.jpg')">
                             <img src="./duomo milan.jpg" alt="Duomo Milan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EDuomo Milan%3C/text%3E%3C/svg%3E'">
@@ -1252,7 +1353,7 @@
                 </div>
 
                 <div class="visita-content" id="domingo-tarde">
-                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
                     <div class="visita-subtitle">🌆 Domingo Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('santa maria delle grazie.jpg')">
@@ -1271,7 +1372,7 @@
                 </div>
 
                 <div class="visita-content" id="lunes-manana">
-                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
                     <div class="visita-subtitle">🌄 Lunes Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('pinacoteca ambrosiana.jpg')">
@@ -1369,14 +1470,14 @@
             { name: 'vuelovueltapablo', type: 'Imagen JPG', icon: '✈️', category: 'pablo', transport: 'plane', description: 'Vuelo Vuelta' },
             
             { name: 'vuelo ida', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Ida General' },
-            { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
+            { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
             
             { name: 'mapa metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'milan-attractions-map', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Mapa Atracciones' },
-            { name: 'plano milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
+            { name: 'plano milan', type: 'Mapa', icon: '️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
             
-            { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
+            { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'basilica de san lorenzo', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'castillo de los sforza', type: 'Imagen', icon: '🏰', category: 'lugares', transport: 'all', description: 'Castillo' },
             { name: 'cripta', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Cripta' },
@@ -1387,11 +1488,11 @@
             { name: 'pinacoteca ambrosiana', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
             { name: 'pinacoteca brera', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
             { name: 'san siro', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
-            { name: 'san siro 2', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
+            { name: 'san siro 2', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 3', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
-            { name: 'san siro 4', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
+            { name: 'san siro 4', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'santa maria delle grazie', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Santa Maria' },
-            { name: 'teatro della scala', type: 'Imagen', icon: '🎭', category: 'lugares', transport: 'all', description: 'Teatro' },
+            { name: 'teatro della scala', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Teatro' },
             { name: 'terraza duomo', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Terraza' },
             
             { name: 'index', type: 'Web', icon: '🌐', category: 'otros', transport: 'all', description: 'Index' },
@@ -1643,7 +1744,7 @@
                     </div>
                     <button class="weather-refresh" onclick="refreshWeather(event)" title="Reintentar">🔄</button>
                 `;
-                showToast('❌ Error al cargar el clima', 'error');
+                showToast(' Error al cargar el clima', 'error');
             }
         }
 
@@ -1665,10 +1766,10 @@
 
         function getWeatherInfo(code) {
             const weatherCodes = {
-                0: { icon: '☀️' }, 1: { icon: '🌤️' }, 2: { icon: '☁️' }, 3: { icon: '☁️' },
+                0: { icon: '☀️' }, 1: { icon: '️' }, 2: { icon: '️' }, 3: { icon: '️' },
                 45: { icon: '🌫️' }, 48: { icon: '🌫️' }, 51: { icon: '🌦️' }, 53: { icon: '🌦️' },
                 55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '🌧️' }, 65: { icon: '🌧️' },
-                71: { icon: '🌨️' }, 73: { icon: '🌨️' }, 75: { icon: '❄️' },
+                71: { icon: '🌨️' }, 73: { icon: '️' }, 75: { icon: '❄️' },
                 95: { icon: '⛈️' }, 96: { icon: '⛈️' }, 99: { icon: '⛈️' }
             };
             return weatherCodes[code] || { icon: '🌡️' };
@@ -1718,7 +1819,7 @@
 
         function openFile(fileName) {
             window.open('./' + fileName, '_blank');
-            showToast(`📂 Abriendo ${fileName}...`, 'info');
+            showToast(` Abriendo ${fileName}...`, 'info');
         }
 
         function openImage(fileName) {
@@ -1811,8 +1912,13 @@
             
             filteredDocs.sort((a, b) => getTripOrder(a.name) - getTripOrder(b.name));
             
-            const trainMessage = document.getElementById('trainMessage');
-            trainMessage.classList.toggle('show', transportFilter === 'train');
+            // Show/hide train info container
+            const trainInfoContainer = document.getElementById('trainInfoContainer');
+            if (transportFilter === 'train') {
+                trainInfoContainer.style.display = 'block';
+            } else {
+                trainInfoContainer.style.display = 'none';
+            }
             
             if (!travelerFilter || !transportFilter) {
                 document.getElementById('filterInfo').innerHTML = 'Selecciona un viajero y tipo de transporte para ver los documentos';
@@ -1823,6 +1929,12 @@
             }
             
             renderDocuments(filteredDocs);
+        }
+
+        function closeTrainInfo() {
+            const trainInfoContainer = document.getElementById('trainInfoContainer');
+            trainInfoContainer.style.display = 'none';
+            showToast('ℹ️ Información de tren cerrada', 'info', 2000);
         }
 
         function renderSchedule(schedule) {
@@ -1849,7 +1961,7 @@
                 const baggageCard = document.createElement('div');
                 baggageCard.className = 'baggage-card';
                 baggageCard.innerHTML = `
-                    <div class="baggage-title">🎒 Medidas Mochila</div>
+                    <div class="baggage-title"> Medidas Mochila</div>
                     <img src="./40x30x20.jpg" alt="Medidas mochila permitida" onerror="this.style.display='none'">
                     <div class="baggage-measures">40 x 30 x 20 cm</div>
                 `;
@@ -1900,6 +2012,7 @@
                             <div class="doc-schedule">🕐 Llegada Milán: <span class="schedule-arrival">12:10</span></div>
                         `;
                     } else {
+                        // VUELTA - con llegada a Madrid incluida
                         scheduleHtml = `
                             <div class="doc-schedule">🕐 Salida Milán: <span class="schedule-departure">16:25</span></div>
                             <div class="doc-schedule">🕐 Salida vuelo: <span class="schedule-departure">19:30</span></div>
@@ -1983,11 +2096,11 @@
             container.appendChild(searchInput);
             
             const categoryIcons = {
-                'Saludos y Cortesía': '👋',
+                'Saludos y Cortesía': '',
                 'Presentaciones': '👤',
-                'Transporte y Direcciones': '🚇',
+                'Transporte y Direcciones': '',
                 'Restaurantes y Comida': '🍝',
-                'Compras': '🛍️',
+                'Compras': '️',
                 'Alojamiento': '🏨',
                 'Tiempo y Números': '⏰',
                 'Emergencias': '🚨',
