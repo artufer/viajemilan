@@ -404,7 +404,17 @@
         }
 
         .train-message.show { display: block; }
-        .train-message::before { content: ' '; font-size: 18px; }
+        
+        .train-schedule {
+            text-align: left;
+            font-size: 13px;
+            line-height: 1.6;
+            background: rgba(255,255,255,0.6);
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-weight: 600;
+        }
 
         .documents-grid {
             display: flex;
@@ -476,7 +486,6 @@
             color: #1565c0;
         }
 
-        /* HORARIOS CON COLORES */
         .doc-schedule {
             font-size: 11px;
             margin: 2px 0;
@@ -531,6 +540,55 @@
 
         .download-btn:hover { background: #5568d3; }
         .download-btn.downloading { background: #27ae60; }
+
+        .baggage-card {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+            border-radius: 12px;
+            padding: 15px;
+            box-shadow: 0 8px 25px rgba(238, 90, 111, 0.4);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 180px;
+            border: 3px solid #fff;
+            animation: baggagePulse 2s ease-in-out infinite;
+        }
+
+        @keyframes baggagePulse {
+            0%, 100% {
+                box-shadow: 0 8px 25px rgba(238, 90, 111, 0.4);
+            }
+            50% {
+                box-shadow: 0 12px 35px rgba(238, 90, 111, 0.6);
+            }
+        }
+
+        .baggage-card img {
+            width: 100%;
+            max-width: 160px;
+            height: auto;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 2px solid white;
+        }
+
+        .baggage-title {
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            text-align: center;
+        }
+
+        .baggage-measures {
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(255,255,255,0.2);
+            padding: 5px 10px;
+            border-radius: 8px;
+            text-align: center;
+        }
 
         .visitas-container {
             background: white;
@@ -1003,6 +1061,7 @@
             .weather-icon { font-size: 16px; }
             .weather-temp { font-size: 14px; }
             .phrase-search { font-size: 13px; padding: 10px; }
+            .baggage-card { width: 160px; }
         }
 
         .hidden { display: none !important; }
@@ -1040,7 +1099,7 @@
                 <button class="key-btn" onclick="pressKey('1')">1</button>
                 <button class="key-btn" onclick="pressKey('2')">2</button>
                 <button class="key-btn" onclick="pressKey('3')">3</button>
-                <button class="key-btn delete" onclick="pressKey('delete')"></button>
+                <button class="key-btn delete" onclick="pressKey('delete')">⌫</button>
                 <button class="key-btn" onclick="pressKey('0')">0</button>
                 <button class="key-btn ok" onclick="pressKey('ok')">OK</button>
             </div>
@@ -1080,9 +1139,9 @@
         </div>
 
         <div class="nav-menu">
-            <button class="nav-btn active" onclick="showSection('documents', this)"> Billetes</button>
+            <button class="nav-btn active" onclick="showSection('documents', this)">📄 Billetes</button>
             <button class="nav-btn" onclick="openWebcam()">📹 Webcam</button>
-            <button class="nav-btn" onclick="openFile('plano milan.jpg')">️ Plano</button>
+            <button class="nav-btn" onclick="openFile('plano milan.jpg')">🗺️ Plano</button>
             <button class="nav-btn" onclick="openFile('mapa metro milan.jpg')">🚇 Metro</button>
             <button class="nav-btn" onclick="showSection('visitas', this)">🏛️ Visitas</button>
             <button class="nav-btn" onclick="showSection('phrases', this)">💬 Frases</button>
@@ -1118,7 +1177,15 @@
                     Selecciona un viajero y tipo de transporte para ver los documentos
                 </div>
                 <div class="train-message" id="trainMessage">
-                     Los billetes se sacarán una vez llegados a Milán
+                    🚆 <strong>Nota:</strong> Los billetes se sacarán una vez llegados a Milán
+                    <div class="train-schedule">
+                        <strong>🚄 Ida:</strong><br>
+                        📍 Salida: Malpensa T1 (03/10/2026 a las 12:41)<br>
+                        📍 Llegada: Milano Centrale (13:37)<br><br>
+                        <strong>🚄 Vuelta:</strong><br>
+                        📍 Salida: Milano Centrale (05/10/2026 a las 16:25)<br>
+                        📍 Llegada: Malpensa T1 (17:18)
+                    </div>
                 </div>
             </div>
 
@@ -1126,7 +1193,7 @@
         </div>
 
         <div class="content-section" id="visitas">
-            <h2 class="section-title">️ Visitas y Lugares</h2>
+            <h2 class="section-title">🏛️ Visitas y Lugares</h2>
             
             <div class="visitas-container">
                 <div class="visitas-title">Selecciona el periodo</div>
@@ -1139,7 +1206,7 @@
                 </div>
 
                 <div class="visita-content" id="sabado-tarde">
-                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
                     <div class="visita-subtitle">🌅 Sábado Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('duomo milan.jpg')">
@@ -1162,7 +1229,7 @@
                 </div>
 
                 <div class="visita-content" id="domingo-manana">
-                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
                     <div class="visita-subtitle">☀️ Domingo Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('san siro.jpg')">
@@ -1186,7 +1253,7 @@
 
                 <div class="visita-content" id="domingo-tarde">
                     <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
-                    <div class="visita-subtitle"> Domingo Tarde</div>
+                    <div class="visita-subtitle">🌆 Domingo Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('santa maria delle grazie.jpg')">
                             <img src="./santa maria delle grazie.jpg" alt="Santa Maria delle Grazie" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESanta Maria delle Grazie%3C/text%3E%3C/svg%3E'">
@@ -1204,7 +1271,7 @@
                 </div>
 
                 <div class="visita-content" id="lunes-manana">
-                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
                     <div class="visita-subtitle">🌄 Lunes Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('pinacoteca ambrosiana.jpg')">
@@ -1242,7 +1309,7 @@
 
     <div class="modal-overlay" id="seatModal">
         <div class="modal-content">
-            <h3> Asiento del Autobús</h3>
+            <h3>🎫 Asiento del Autobús</h3>
             <div id="errorMessage" class="error-message">
                 ⚠️ No se encontró la imagen del asiento.
             </div>
@@ -1304,17 +1371,17 @@
             { name: 'vuelo ida', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Ida General' },
             { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
             
-            { name: 'mapa metro milan', type: 'Mapa', icon: '️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
+            { name: 'mapa metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'milan-attractions-map', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Mapa Atracciones' },
             { name: 'plano milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
             
             { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
-            { name: 'basilica de san lorenzo', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Basílica' },
+            { name: 'basilica de san lorenzo', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'castillo de los sforza', type: 'Imagen', icon: '🏰', category: 'lugares', transport: 'all', description: 'Castillo' },
-            { name: 'cripta', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Cripta' },
+            { name: 'cripta', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Cripta' },
             { name: 'duomo milan', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Duomo' },
-            { name: 'fachada-san lorenzo-1', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Fachada' },
+            { name: 'fachada-san lorenzo-1', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Fachada' },
             { name: 'palacio real', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palacio' },
             { name: 'palazzo reale milan', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palazzo Reale' },
             { name: 'pinacoteca ambrosiana', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
@@ -1599,12 +1666,12 @@
         function getWeatherInfo(code) {
             const weatherCodes = {
                 0: { icon: '☀️' }, 1: { icon: '🌤️' }, 2: { icon: '☁️' }, 3: { icon: '☁️' },
-                45: { icon: '🌫️' }, 48: { icon: '🌫️' }, 51: { icon: '️' }, 53: { icon: '🌦️' },
-                55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '🌧️' }, 65: { icon: '️' },
+                45: { icon: '🌫️' }, 48: { icon: '🌫️' }, 51: { icon: '🌦️' }, 53: { icon: '🌦️' },
+                55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '🌧️' }, 65: { icon: '🌧️' },
                 71: { icon: '🌨️' }, 73: { icon: '🌨️' }, 75: { icon: '❄️' },
-                95: { icon: '⛈️' }, 96: { icon: '️' }, 99: { icon: '⛈️' }
+                95: { icon: '⛈️' }, 96: { icon: '⛈️' }, 99: { icon: '⛈️' }
             };
-            return weatherCodes[code] || { icon: '️' };
+            return weatherCodes[code] || { icon: '🌡️' };
         }
 
         function showToast(message, type = 'info', duration = 3000) {
@@ -1758,7 +1825,6 @@
             renderDocuments(filteredDocs);
         }
 
-        // Parsea el horario "HH:MM - HH:MM" y devuelve HTML con colores
         function renderSchedule(schedule) {
             const parts = schedule.split(' - ');
             if (parts.length === 2) {
@@ -1779,6 +1845,17 @@
                 return;
             }
             
+            if (transportFilter === 'plane') {
+                const baggageCard = document.createElement('div');
+                baggageCard.className = 'baggage-card';
+                baggageCard.innerHTML = `
+                    <div class="baggage-title">🎒 Medidas Mochila</div>
+                    <img src="./40x30x20.jpg" alt="Medidas mochila permitida" onerror="this.style.display='none'">
+                    <div class="baggage-measures">40 x 30 x 20 cm</div>
+                `;
+                grid.appendChild(baggageCard);
+            }
+            
             docsToRender.forEach((doc) => {
                 const card = document.createElement('div');
                 card.className = `doc-card ${doc.transport}`;
@@ -1787,7 +1864,6 @@
                                       doc.transport === 'train' ? '<span class="transport-badge train">Tren</span>' : 
                                       doc.transport === 'plane' ? '<span class="transport-badge plane">Avión</span>' : '';
                 
-                // Para bus: NO mostrar nombre del archivo, mostrar icono + badge + ruta + horario coloreado + asiento
                 let cardContent = '';
                 
                 if (doc.transport === 'bus') {
@@ -1800,7 +1876,7 @@
                         extraInfo = `
                             <div class="doc-route" onclick="openGoogleMaps('${suffix}')">📍 ${tripInfo.route}</div>
                             <div class="doc-schedule">🕐 ${renderSchedule(tripInfo.schedule)}</div>
-                            ${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})"> Asiento ${seat}</div>` : ''}
+                            ${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})">🎫 Asiento ${seat}</div>` : ''}
                         `;
                     }
                     
@@ -1810,8 +1886,35 @@
                         ${extraInfo}
                         <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
                     `;
+                } else if (doc.transport === 'plane') {
+                    const isIda = doc.name.toLowerCase().includes('ida');
+                    const routeText = isIda ? 'Barajas - Malpensa' : 'Malpensa - Barajas';
+                    const routeLink = isIda 
+                        ? 'https://www.google.com/maps/place/Terminal+T2+Salidas,+Barajas,+28042+Madrid/@40.4674407,-3.5730472,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231cffa6e09e9:0xb34f6be64e3dfb62!8m2!3d40.4674407!4d-3.5704723!16s%2Fg%2F11h22bfldp?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D'
+                        : 'https://www.google.com/maps/place/Malpensa+Aeroporto+T1/@45.6271487,8.7087151,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786611293e8fd07:0x59bcfa695ed94c05!8m2!3d45.6271487!4d8.71129!16s%2Fg%2F11bc60br7p?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D';
+                    
+                    let scheduleHtml = '';
+                    if (isIda) {
+                        scheduleHtml = `
+                            <div class="doc-schedule">🕐 Salida Barajas: <span class="schedule-departure">09:55</span></div>
+                            <div class="doc-schedule">🕐 Llegada Milán: <span class="schedule-arrival">12:10</span></div>
+                        `;
+                    } else {
+                        scheduleHtml = `
+                            <div class="doc-schedule">🕐 Salida Milán: <span class="schedule-departure">16:25</span></div>
+                            <div class="doc-schedule">🕐 Salida vuelo: <span class="schedule-departure">19:30</span></div>
+                            <div class="doc-schedule">🕐 Llegada Madrid: <span class="schedule-arrival">22:00</span></div>
+                        `;
+                    }
+                    
+                    cardContent = `
+                        <div class="doc-icon">${doc.icon || '✈️'}</div>
+                        <div class="doc-name">${transportBadge}</div>
+                        <div class="doc-route" onclick="window.open('${routeLink}', '_blank')">📍 ${routeText}</div>
+                        ${scheduleHtml}
+                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
+                    `;
                 } else {
-                    // Para otros transportes: mostrar nombre del archivo como antes
                     cardContent = `
                         <div class="doc-icon">${doc.icon || ''}</div>
                         <div class="doc-name">${doc.name} ${transportBadge}</div>
