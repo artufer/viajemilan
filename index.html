@@ -18,7 +18,6 @@
             color: #333;
         }
 
-        /* Login Screen with Keypad */
         .login-screen {
             display: flex;
             justify-content: center;
@@ -143,21 +142,10 @@
             transform: translateY(0);
         }
 
-        .key-btn.delete {
-            background: #e74c3c;
-        }
-
-        .key-btn.delete:hover {
-            background: #c0392b;
-        }
-
-        .key-btn.ok {
-            background: #00c853;
-        }
-
-        .key-btn.ok:hover {
-            background: #00a843;
-        }
+        .key-btn.delete { background: #e74c3c; }
+        .key-btn.delete:hover { background: #c0392b; }
+        .key-btn.ok { background: #00c853; }
+        .key-btn.ok:hover { background: #00a843; }
 
         .error-msg {
             color: #e74c3c;
@@ -170,10 +158,7 @@
             font-size: 14px;
         }
 
-        /* Main App */
-        .main-app {
-            display: none;
-        }
+        .main-app { display: none; }
 
         .header {
             background: rgba(255,255,255,0.95);
@@ -191,7 +176,6 @@
             margin-bottom: 5px;
         }
 
-        /* Weather Display - TERMÓMETRO PEQUEÑO */
         .weather-display {
             display: flex;
             justify-content: center;
@@ -217,26 +201,41 @@
             box-shadow: 0 4px 12px rgba(102, 126, 234, 0.6);
         }
 
-        .weather-icon {
-            font-size: 18px;
-        }
+        .weather-icon { font-size: 18px; }
+        .weather-temp { font-size: 16px; font-weight: bold; }
+        .weather-location { font-size: 11px; opacity: 0.9; }
 
-        .weather-temp {
+        .weather-refresh {
+            background: none;
+            border: none;
+            cursor: pointer;
             font-size: 16px;
-            font-weight: bold;
+            margin-left: 8px;
+            transition: transform 0.3s;
+            color: white;
+            padding: 0;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .weather-location {
-            font-size: 11px;
-            opacity: 0.9;
+        .weather-refresh:hover { transform: rotate(180deg); }
+        .weather-refresh.spinning { animation: spin 0.5s linear; }
+
+        .weather-timestamp {
+            font-size: 9px;
+            opacity: 0.8;
+            margin-top: 2px;
+            text-align: center;
         }
 
-        .weather-loading {
-            color: #667eea;
-            font-size: 12px;
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
-        /* Countdown - COMPACTO PARA MÓVIL */
         .countdown-container {
             background: linear-gradient(135deg, #ff9a56 0%, #ffb347 100%);
             padding: 15px 10px;
@@ -276,7 +275,6 @@
             margin-top: 2px;
         }
 
-        /* Navigation - COMPACTA PARA MÓVIL */
         .nav-menu {
             background: white;
             padding: 10px;
@@ -304,7 +302,6 @@
             transform: translateY(-2px);
         }
 
-        /* Content Sections */
         .content-section {
             display: none;
             padding: 15px;
@@ -312,9 +309,7 @@
             margin: 0 auto;
         }
 
-        .content-section.active {
-            display: block;
-        }
+        .content-section.active { display: block; }
 
         .section-title {
             color: white;
@@ -323,7 +318,6 @@
             text-align: center;
         }
 
-        /* Filters - COMPACTOS */
         .filters-container {
             background: white;
             padding: 15px;
@@ -381,11 +375,8 @@
             font-size: 13px;
         }
 
-        .filter-info strong {
-            color: #667eea;
-        }
+        .filter-info strong { color: #667eea; }
 
-        /* NOTA DE TREN - COMPACTA */
         .train-message {
             margin-top: 15px;
             padding: 15px;
@@ -412,16 +403,9 @@
             }
         }
 
-        .train-message.show {
-            display: block;
-        }
+        .train-message.show { display: block; }
+        .train-message::before { content: ' '; font-size: 18px; }
 
-        .train-message::before {
-            content: ' ';
-            font-size: 18px;
-        }
-
-        /* Documents Grid - COMPACTO */
         .documents-grid {
             display: flex;
             flex-wrap: wrap;
@@ -451,17 +435,9 @@
             box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
 
-        .doc-card.bus {
-            border-left-color: #f39c12;
-        }
-
-        .doc-card.train {
-            border-left-color: #27ae60;
-        }
-
-        .doc-card.plane {
-            border-left-color: #3498db;
-        }
+        .doc-card.bus { border-left-color: #f39c12; }
+        .doc-card.train { border-left-color: #27ae60; }
+        .doc-card.plane { border-left-color: #3498db; }
 
         .doc-icon {
             font-size: 30px;
@@ -500,10 +476,27 @@
             color: #1565c0;
         }
 
+        /* HORARIOS CON COLORES */
         .doc-schedule {
-            color: #555;
-            font-size: 10px;
+            font-size: 11px;
             margin: 2px 0;
+            font-weight: 600;
+        }
+
+        .schedule-departure {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .schedule-separator {
+            color: #f1c40f;
+            font-weight: bold;
+            margin: 0 3px;
+        }
+
+        .schedule-arrival {
+            color: #e74c3c;
+            font-weight: bold;
         }
 
         .doc-seat {
@@ -536,11 +529,9 @@
             width: 100%;
         }
 
-        .download-btn:hover {
-            background: #5568d3;
-        }
+        .download-btn:hover { background: #5568d3; }
+        .download-btn.downloading { background: #27ae60; }
 
-        /* Visitas Section - COMPACTA */
         .visitas-container {
             background: white;
             border-radius: 12px;
@@ -656,7 +647,6 @@
             transform: translateY(-2px);
         }
 
-        /* Modal for seat image */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -671,9 +661,7 @@
             padding: 20px;
         }
 
-        .modal-overlay.active {
-            display: flex;
-        }
+        .modal-overlay.active { display: flex; }
 
         .modal-content {
             background: white;
@@ -687,14 +675,8 @@
         }
 
         @keyframes modalFadeIn {
-            from {
-                opacity: 0;
-                transform: scale(0.8);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
         }
 
         .modal-content h3 {
@@ -744,16 +726,28 @@
             font-size: 13px;
         }
 
-        .error-message.show {
-            display: block;
-        }
+        .error-message.show { display: block; }
 
-        /* Phrases - Categorized with Accordion */
         .phrases-container {
             background: white;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .phrase-search {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .phrase-search:focus {
+            outline: none;
+            border-color: #667eea;
         }
 
         .phrase-category {
@@ -826,9 +820,7 @@
             border-radius: 5px;
         }
 
-        .phrase-item:last-child {
-            border-bottom: none;
-        }
+        .phrase-item:last-child { border-bottom: none; }
 
         .phrase-text {
             flex: 1;
@@ -858,11 +850,8 @@
             white-space: nowrap;
         }
 
-        .audio-btn:hover {
-            background: #5568d3;
-        }
+        .audio-btn:hover { background: #5568d3; }
 
-        /* Checklist - COMPACTO */
         .checklist-container {
             background: white;
             border-radius: 10px;
@@ -870,9 +859,29 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
 
-        .checklist-category {
-            margin-bottom: 20px;
+        .checklist-progress { margin-bottom: 20px; }
+
+        .checklist-progress-bar {
+            background: #e0e0e0;
+            border-radius: 10px;
+            height: 25px;
+            overflow: hidden;
+            position: relative;
         }
+
+        .checklist-progress-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            transition: width 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .checklist-category { margin-bottom: 20px; }
 
         .checklist-category h3 {
             color: #667eea;
@@ -893,9 +902,7 @@
             transition: background 0.3s;
         }
 
-        .checklist-item:hover {
-            background: #e9ecef;
-        }
+        .checklist-item:hover { background: #e9ecef; }
 
         .checklist-item input[type="checkbox"] {
             margin-right: 12px;
@@ -909,7 +916,6 @@
             text-decoration: line-through;
         }
 
-        /* Weather Info - COMPACTO */
         .weather-info {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -930,11 +936,8 @@
             margin: 8px 0;
         }
 
-        .weather-info p {
-            font-size: 13px;
-        }
+        .weather-info p { font-size: 13px; }
 
-        /* Transport Type Badge */
         .transport-badge {
             display: inline-block;
             padding: 2px 6px;
@@ -945,88 +948,68 @@
             margin-left: 4px;
         }
 
-        .transport-badge.bus {
-            background: #f39c12;
-            color: white;
+        .transport-badge.bus { background: #f39c12; color: white; }
+        .transport-badge.train { background: #27ae60; color: white; }
+        .transport-badge.plane { background: #3498db; color: white; }
+
+        .toast-container {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10000;
+            pointer-events: none;
         }
 
-        .transport-badge.train {
-            background: #27ae60;
+        .toast {
+            background: #333;
             color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+            margin-bottom: 10px;
+            animation: slideUp 0.3s ease;
+            font-size: 14px;
+            font-weight: 600;
+            pointer-events: auto;
         }
 
-        .transport-badge.plane {
-            background: #3498db;
-            color: white;
+        .toast.success { background: #27ae60; }
+        .toast.error { background: #e74c3c; }
+        .toast.info { background: #3498db; }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Responsive - MÓVIL */
+        @keyframes slideDown {
+            from { opacity: 1; transform: translateY(0); }
+            to { opacity: 0; transform: translateY(20px); }
+        }
+
         @media (max-width: 480px) {
-            .countdown-item {
-                min-width: 55px;
-                padding: 6px 8px;
-            }
-
-            .countdown-number {
-                font-size: 24px;
-            }
-
-            .countdown-label {
-                font-size: 10px;
-            }
-
-            .nav-btn {
-                padding: 8px 12px;
-                font-size: 12px;
-            }
-
-            .doc-card {
-                width: 140px;
-                padding: 10px;
-            }
-
-            .doc-icon {
-                font-size: 26px;
-            }
-
-            .doc-name {
-                font-size: 11px;
-            }
-
-            .visitas-buttons {
-                grid-template-columns: 1fr;
-            }
-
-            .images-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .image-card img {
-                height: 120px;
-            }
-
-            .weather-display {
-                font-size: 12px;
-                padding: 5px 10px;
-            }
-
-            .weather-icon {
-                font-size: 16px;
-            }
-
-            .weather-temp {
-                font-size: 14px;
-            }
+            .countdown-item { min-width: 55px; padding: 6px 8px; }
+            .countdown-number { font-size: 24px; }
+            .countdown-label { font-size: 10px; }
+            .nav-btn { padding: 8px 12px; font-size: 12px; }
+            .doc-card { width: 140px; padding: 10px; }
+            .doc-icon { font-size: 26px; }
+            .doc-name { font-size: 11px; }
+            .visitas-buttons { grid-template-columns: 1fr; }
+            .images-grid { grid-template-columns: 1fr; }
+            .image-card img { height: 120px; }
+            .weather-display { font-size: 12px; padding: 5px 10px; }
+            .weather-icon { font-size: 16px; }
+            .weather-temp { font-size: 14px; }
+            .phrase-search { font-size: 13px; padding: 10px; }
         }
 
-        .hidden {
-            display: none !important;
-        }
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
 
-    <!-- Login Screen with Keypad -->
     <div class="login-screen" id="loginScreen">
         <div class="login-box">
             <h2>🔐 CLAVE DE ACCESO</h2>
@@ -1057,7 +1040,7 @@
                 <button class="key-btn" onclick="pressKey('1')">1</button>
                 <button class="key-btn" onclick="pressKey('2')">2</button>
                 <button class="key-btn" onclick="pressKey('3')">3</button>
-                <button class="key-btn delete" onclick="pressKey('delete')">⌫</button>
+                <button class="key-btn delete" onclick="pressKey('delete')"></button>
                 <button class="key-btn" onclick="pressKey('0')">0</button>
                 <button class="key-btn ok" onclick="pressKey('ok')">OK</button>
             </div>
@@ -1066,19 +1049,16 @@
         </div>
     </div>
 
-    <!-- Main App -->
     <div class="main-app" id="mainApp">
         <div class="header">
-            <h1>🇹 Viaje a Milán Octubre 2026</h1>
-            <!-- Thermometer Display - PEQUEÑO Y CLICKEABLE -->
+            <h1>🇮🇹 Viaje a Milán Octubre 2026</h1>
             <div class="weather-display" id="weatherDisplay" onclick="openWeatherForecast()" title="Ver previsión de los próximos días">
-                <span class="weather-loading">️ Cargando...</span>
+                <span class="weather-loading">🌡️ Cargando...</span>
             </div>
         </div>
 
-        <!-- Countdown - COMPACTO -->
         <div class="countdown-container">
-            <h2> Cuenta atrás</h2>
+            <h2>⏰ Cuenta atrás</h2>
             <div class="countdown" id="countdown">
                 <div class="countdown-item">
                     <span class="countdown-number" id="days">00</span>
@@ -1099,22 +1079,19 @@
             </div>
         </div>
 
-        <!-- Navigation - COMPACTA -->
         <div class="nav-menu">
-            <button class="nav-btn active" onclick="showSection('documents', this)">📄 Billetes</button>
+            <button class="nav-btn active" onclick="showSection('documents', this)"> Billetes</button>
             <button class="nav-btn" onclick="openWebcam()">📹 Webcam</button>
-            <button class="nav-btn" onclick="openFile('plano milan.jpg')">🗺️ Plano</button>
+            <button class="nav-btn" onclick="openFile('plano milan.jpg')">️ Plano</button>
             <button class="nav-btn" onclick="openFile('mapa metro milan.jpg')">🚇 Metro</button>
             <button class="nav-btn" onclick="showSection('visitas', this)">🏛️ Visitas</button>
             <button class="nav-btn" onclick="showSection('phrases', this)">💬 Frases</button>
             <button class="nav-btn" onclick="showSection('checklist', this)">✅ Checklist</button>
         </div>
 
-        <!-- Documents Section -->
         <div class="content-section active" id="documents">
             <h2 class="section-title">📄 Billetes y Documentos</h2>
             
-            <!-- Filters -->
             <div class="filters-container">
                 <div class="filters-title">🔍 Filtrar Documentos</div>
                 <div class="filters-grid">
@@ -1128,7 +1105,7 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="transportFilter"> Transporte:</label>
+                        <label for="transportFilter">🚍 Tipo de Transporte:</label>
                         <select id="transportFilter" onchange="applyFilters()">
                             <option value="">Seleccionar transporte...</option>
                             <option value="bus">🚌 Autobús (ALSA)</option>
@@ -1141,40 +1118,28 @@
                     Selecciona un viajero y tipo de transporte para ver los documentos
                 </div>
                 <div class="train-message" id="trainMessage">
-                    🚆 Los billetes se sacarán una vez llegados a Milán
+                     Los billetes se sacarán una vez llegados a Milán
                 </div>
             </div>
 
-            <div class="documents-grid" id="documentsGrid">
-                <!-- Documents will be inserted here by JavaScript -->
-            </div>
+            <div class="documents-grid" id="documentsGrid"></div>
         </div>
 
-        <!-- Visitas Section -->
         <div class="content-section" id="visitas">
-            <h2 class="section-title">🏛️ Visitas y Lugares</h2>
+            <h2 class="section-title">️ Visitas y Lugares</h2>
             
             <div class="visitas-container">
                 <div class="visitas-title">Selecciona el periodo</div>
                 
                 <div class="visitas-buttons" id="visitasButtons">
-                    <button class="visita-btn" onclick="showVisita('sabado-tarde')">
-                        🌅 SÁBADO TARDE
-                    </button>
-                    <button class="visita-btn" onclick="showVisita('domingo-manana')">
-                        ☀️ DOMINGO MAÑANA
-                    </button>
-                    <button class="visita-btn" onclick="showVisita('domingo-tarde')">
-                        🌆 DOMINGO TARDE
-                    </button>
-                    <button class="visita-btn" onclick="showVisita('lunes-manana')">
-                         LUNES MAÑANA
-                    </button>
+                    <button class="visita-btn" onclick="showVisita('sabado-tarde')">🌅 SÁBADO TARDE</button>
+                    <button class="visita-btn" onclick="showVisita('domingo-manana')">☀️ DOMINGO MAÑANA</button>
+                    <button class="visita-btn" onclick="showVisita('domingo-tarde')">🌆 DOMINGO TARDE</button>
+                    <button class="visita-btn" onclick="showVisita('lunes-manana')">🌄 LUNES MAÑANA</button>
                 </div>
 
-                <!-- Sábado Tarde -->
                 <div class="visita-content" id="sabado-tarde">
-                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
                     <div class="visita-subtitle">🌅 Sábado Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('duomo milan.jpg')">
@@ -1196,9 +1161,8 @@
                     </div>
                 </div>
 
-                <!-- Domingo Mañana -->
                 <div class="visita-content" id="domingo-manana">
-                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
                     <div class="visita-subtitle">☀️ Domingo Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('san siro.jpg')">
@@ -1220,10 +1184,9 @@
                     </div>
                 </div>
 
-                <!-- Domingo Tarde -->
                 <div class="visita-content" id="domingo-tarde">
                     <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
-                    <div class="visita-subtitle">🌆 Domingo Tarde</div>
+                    <div class="visita-subtitle"> Domingo Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('santa maria delle grazie.jpg')">
                             <img src="./santa maria delle grazie.jpg" alt="Santa Maria delle Grazie" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESanta Maria delle Grazie%3C/text%3E%3C/svg%3E'">
@@ -1240,9 +1203,8 @@
                     </div>
                 </div>
 
-                <!-- Lunes Mañana -->
                 <div class="visita-content" id="lunes-manana">
-                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
                     <div class="visita-subtitle">🌄 Lunes Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('pinacoteca ambrosiana.jpg')">
@@ -1258,15 +1220,11 @@
             </div>
         </div>
 
-        <!-- Phrases Section -->
         <div class="content-section" id="phrases">
             <h2 class="section-title">💬 Frases Esenciales</h2>
-            <div class="phrases-container" id="phrasesContainer">
-                <!-- Phrases will be inserted here by JavaScript -->
-            </div>
+            <div class="phrases-container" id="phrasesContainer"></div>
         </div>
 
-        <!-- Checklist Section -->
         <div class="content-section" id="checklist">
             <h2 class="section-title">✅ Checklist - Equipaje</h2>
             
@@ -1276,18 +1234,17 @@
                 <p>Noches frescas (~10°C) • Posibilidad de lluvia</p>
             </div>
 
-            <div class="checklist-container" id="checklistContainer">
-                <!-- Checklist will be inserted here by JavaScript -->
-            </div>
+            <div class="checklist-container" id="checklistContainer"></div>
         </div>
     </div>
 
-    <!-- Modal for seat image -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <div class="modal-overlay" id="seatModal">
         <div class="modal-content">
-            <h3>🎫 Asiento del Autobús</h3>
+            <h3> Asiento del Autobús</h3>
             <div id="errorMessage" class="error-message">
-                ⚠️ No se encontró la imagen del asiento. Asegúrate de que el archivo alsa{numero}.jpg existe en la misma carpeta.
+                ⚠️ No se encontró la imagen del asiento.
             </div>
             <img id="seatImage" src="" alt="Asiento ALSA">
             <button class="modal-close" onclick="closeSeatModal()">Cerrar</button>
@@ -1295,27 +1252,13 @@
     </div>
 
     <script>
-        // Valid access codes
-        const validCodes = {
-            first: '1452',
-            second: '3698'
-        };
-        
+        const validCodes = { first: '1452', second: '3698' };
         let currentStep = 1;
         let currentPin = '';
-        
-        // Target date: October 3, 2026 at 02:15
         const targetDate = new Date('2026-10-03T02:15:00').getTime();
 
-        // Order for trips
-        const tripOrder = {
-            '0215': 1,
-            '0430': 2,
-            '2300': 3,
-            '0200': 4
-        };
+        const tripOrder = { '0215': 1, '0430': 2, '2300': 3, '0200': 4 };
 
-        // Google Maps links for each trip
         const googleMapsLinks = {
             '0215': 'https://www.google.com/maps/place/Estaci%C3%B3n+de+autobuses+de+Le%C3%B3n+-+Reina+Urraca/@42.5934825,-5.5817212,1282m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd379b3043d25ce1:0xc6771db2967c4d3b!8m2!3d42.5934825!4d-5.5791463!16s%2Fg%2F11h9mlm1yn?entry=ttu&g_ep=EgoyMDI2MDgxNi4wIKXMDSoASAFQAw%3D%3D',
             '0430': 'https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,1302m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDgxNi4wIKXMDSoASAFQAw%3D%3D',
@@ -1323,7 +1266,6 @@
             '0200': 'https://www.google.com/maps/place/Estaci%C3%B3n+de+Autobuses+de+Valladolid/@41.6412863,-4.7346176,1302m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd476d35d23a3ca1:0x7f17bb5eb2668371!8m2!3d41.6412863!4d-4.7320427!16s%2Fg%2F11btx0qz4c?entry=ttu&g_ep=EgoyMDI2MDgxNi4wIKXMDSoASAFQAw%3D%3D'
         };
 
-        // Bus trip info (same for all travelers)
         const busTripInfo = {
             '0215': { route: 'LEÓN - VALLADOLID', schedule: '02:15 - 04:15' },
             '0430': { route: 'VALLADOLID - BARAJAS T4', schedule: '04:30 - 07:30' },
@@ -1331,14 +1273,12 @@
             '0200': { route: 'VALLADOLID - LEÓN', schedule: '02:00 - 03:40' }
         };
 
-        // Seat numbers per traveler (in trip order: 0215, 0430, 2300, 0200)
         const seatNumbers = {
             'arturo': { '0215': 34, '0430': 40, '2300': 25, '0200': 33 },
             'daniel': { '0215': 38, '0430': 45, '2300': 29, '0200': 34 },
             'pablo':  { '0215': 37, '0430': 46, '2300': 30, '0200': 29 }
         };
 
-        // Documents data
         const documents = [
             { name: 'arturoalsa0200', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
             { name: 'arturoalsa0215', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
@@ -1364,22 +1304,22 @@
             { name: 'vuelo ida', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Ida General' },
             { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
             
-            { name: 'mapa metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
+            { name: 'mapa metro milan', type: 'Mapa', icon: '️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
             { name: 'milan-attractions-map', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Mapa Atracciones' },
             { name: 'plano milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
             
             { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'basilica de san lorenzo', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Basílica' },
-            { name: 'castillo de los sforza', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Castillo' },
-            { name: 'cripta', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Cripta' },
+            { name: 'castillo de los sforza', type: 'Imagen', icon: '🏰', category: 'lugares', transport: 'all', description: 'Castillo' },
+            { name: 'cripta', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Cripta' },
             { name: 'duomo milan', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Duomo' },
-            { name: 'fachada-san lorenzo-1', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Fachada' },
+            { name: 'fachada-san lorenzo-1', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Fachada' },
             { name: 'palacio real', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palacio' },
             { name: 'palazzo reale milan', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palazzo Reale' },
             { name: 'pinacoteca ambrosiana', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
             { name: 'pinacoteca brera', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
-            { name: 'san siro', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Estadio' },
+            { name: 'san siro', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 2', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 3', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 4', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
@@ -1391,7 +1331,6 @@
             { name: 'menu', type: 'Web', icon: '📱', category: 'otros', transport: 'all', description: 'Menú' }
         ];
 
-        // 100 Essential Italian Phrases - CATEGORIZED (masculine only)
         const phrasesByCategory = {
             'Saludos y Cortesía': [
                 { italian: "Buongiorno", spanish: "Buenos días/Buenas tardes" },
@@ -1515,72 +1454,36 @@
             ]
         };
 
-        // Checklist items - MINIMALIST (hand luggage only)
         const checklistItems = [
             {
                 category: "Documentación",
-                items: [
-                    "DNI o Pasaporte",
-                    "Tarjeta sanitaria europea",
-                    "Tarjetas de crédito/débito",
-                    "Efectivo (euros)",
-                    "Billetes en el móvil"
-                ]
+                items: ["DNI o Pasaporte", "Tarjeta sanitaria europea", "Tarjetas de crédito/débito", "Efectivo (euros)", "Billetes en el móvil"]
             },
             {
                 category: "Ropa (mínima)",
-                items: [
-                    "Chaqueta impermeable ligera",
-                    "1 Jersey o sudadera",
-                    "2-3 Camisetas",
-                    "1 Pantalón cómodo",
-                    "Ropa interior (3 cambios)",
-                    "Calcetines (3 pares)",
-                    "Zapatos cómodos para caminar",
-                    "Gorro",
-                    "Bufanda"
-                ]
+                items: ["Chaqueta impermeable ligera", "1 Jersey o sudadera", "2-3 Camisetas", "1 Pantalón cómodo", "Ropa interior (3 cambios)", "Calcetines (3 pares)", "Zapatos cómodos para caminar", "Gorro", "Bufanda"]
             },
             {
                 category: "Aseo (líquidos <100ml)",
-                items: [
-                    "Cepillo de dientes",
-                    "Colonia (<100ml)",
-                    "Champú (<100ml)",
-                    "Medicamentos personales"
-                ]
+                items: ["Cepillo de dientes", "Colonia (<100ml)", "Champú (<100ml)", "Medicamentos personales"]
             },
             {
                 category: "Electrónica",
-                items: [
-                    "Móvil y cargador",
-                    "Power bank",
-                    "Auriculares"
-                ]
+                items: ["Móvil y cargador", "Power bank", "Auriculares"]
             },
             {
                 category: "Accesorios",
-                items: [
-                    "Paraguas plegable",
-                    "Gafas de sol",
-                    "Mochila pequeña",
-                    "Botella de agua vacía"
-                ]
+                items: ["Paraguas plegable", "Gafas de sol", "Mochila pequeña", "Botella de agua vacía"]
             }
         ];
 
-        // Keypad functions
         function pressKey(key) {
             if (key === 'delete') {
                 currentPin = currentPin.slice(0, -1);
             } else if (key === 'ok') {
-                if (currentPin.length === 4) {
-                    verifyCode();
-                }
+                if (currentPin.length === 4) verifyCode();
             } else {
-                if (currentPin.length < 4) {
-                    currentPin += key;
-                }
+                if (currentPin.length < 4) currentPin += key;
             }
             updatePinDisplay();
         }
@@ -1588,11 +1491,7 @@
         function updatePinDisplay() {
             const dots = document.querySelectorAll('.pin-dot');
             dots.forEach((dot, index) => {
-                if (index < currentPin.length) {
-                    dot.classList.add('filled');
-                } else {
-                    dot.classList.remove('filled');
-                }
+                dot.classList.toggle('filled', index < currentPin.length);
             });
         }
 
@@ -1614,9 +1513,7 @@
                     errorMsg.style.display = 'block';
                     currentPin = '';
                     updatePinDisplay();
-                    setTimeout(() => {
-                        errorMsg.style.display = 'none';
-                    }, 3000);
+                    setTimeout(() => errorMsg.style.display = 'none', 3000);
                 }
             } else {
                 if (currentPin === validCodes.second) {
@@ -1632,14 +1529,11 @@
                     errorMsg.style.display = 'block';
                     currentPin = '';
                     updatePinDisplay();
-                    setTimeout(() => {
-                        errorMsg.style.display = 'none';
-                    }, 3000);
+                    setTimeout(() => errorMsg.style.display = 'none', 3000);
                 }
             }
         }
 
-        // Initialize app
         function initApp() {
             renderDocuments();
             renderPhrases();
@@ -1649,20 +1543,19 @@
             setInterval(updateCountdown, 1000);
         }
 
-        // Fetch Milan weather from Open-Meteo API (no API key required)
         async function fetchMilanWeather() {
             const weatherDisplay = document.getElementById('weatherDisplay');
             
             try {
-                // Using Open-Meteo API (free, no API key required)
                 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=45.4642&longitude=9.1900&current=temperature_2m,weather_code&timezone=Europe/Rome');
                 const data = await response.json();
                 
                 const temp = Math.round(data.current.temperature_2m);
                 const weatherCode = data.current.weather_code;
-                
-                // Get weather icon and description based on WMO code
                 const weatherInfo = getWeatherInfo(weatherCode);
+                
+                const now = new Date();
+                const timeString = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
                 
                 weatherDisplay.innerHTML = `
                     <span class="weather-icon">${weatherInfo.icon}</span>
@@ -1670,6 +1563,8 @@
                         <div class="weather-temp">${temp}°C</div>
                         <div class="weather-location">Milán</div>
                     </div>
+                    <button class="weather-refresh" onclick="refreshWeather(event)" title="Actualizar">🔄</button>
+                    <div class="weather-timestamp">Actualizado: ${timeString}</div>
                 `;
             } catch (error) {
                 console.error('Error fetching weather:', error);
@@ -1679,43 +1574,52 @@
                         <div class="weather-temp">--°C</div>
                         <div class="weather-location">Milán</div>
                     </div>
+                    <button class="weather-refresh" onclick="refreshWeather(event)" title="Reintentar">🔄</button>
                 `;
+                showToast('❌ Error al cargar el clima', 'error');
             }
         }
 
-        // Open weather forecast in new window
-        function openWeatherForecast() {
-            // Open ilmeteo.it forecast for Milan in new window
-            window.open('https://www.ilmeteo.it/meteo/Milano', '_blank');
+        function refreshWeather(event) {
+            if (event) {
+                event.stopPropagation();
+                const refreshBtn = event.target;
+                refreshBtn.classList.add('spinning');
+                setTimeout(() => refreshBtn.classList.remove('spinning'), 500);
+            }
+            fetchMilanWeather();
+            showToast('🌡️ Temperatura actualizada', 'success');
         }
 
-        // Get weather icon and description based on WMO weather code
+        function openWeatherForecast() {
+            window.open('https://www.ilmeteo.it/meteo/Milano', '_blank');
+            showToast('📅 Abriendo previsión extendida...', 'info');
+        }
+
         function getWeatherInfo(code) {
             const weatherCodes = {
-                0: { icon: '☀️', desc: 'Despejado' },
-                1: { icon: '🌤️', desc: 'Parcialmente nublado' },
-                2: { icon: '☁️', desc: 'Nublado' },
-                3: { icon: '☁️', desc: 'Muy nublado' },
-                45: { icon: '️', desc: 'Niebla' },
-                48: { icon: '️', desc: 'Niebla con escarcha' },
-                51: { icon: '🌦️', desc: 'Llovizna' },
-                53: { icon: '🌦️', desc: 'Llovizna moderada' },
-                55: { icon: '🌧️', desc: 'Llovizna intensa' },
-                61: { icon: '️', desc: 'Lluvia' },
-                63: { icon: '️', desc: 'Lluvia moderada' },
-                65: { icon: '️', desc: 'Lluvia intensa' },
-                71: { icon: '🌨️', desc: 'Nieve' },
-                73: { icon: '🌨️', desc: 'Nieve moderada' },
-                75: { icon: '❄️', desc: 'Nieve intensa' },
-                95: { icon: '⛈️', desc: 'Tormenta' },
-                96: { icon: '⛈️', desc: 'Tormenta con granizo' },
-                99: { icon: '⛈️', desc: 'Tormenta con granizo intenso' }
+                0: { icon: '☀️' }, 1: { icon: '🌤️' }, 2: { icon: '☁️' }, 3: { icon: '☁️' },
+                45: { icon: '🌫️' }, 48: { icon: '🌫️' }, 51: { icon: '️' }, 53: { icon: '🌦️' },
+                55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '🌧️' }, 65: { icon: '️' },
+                71: { icon: '🌨️' }, 73: { icon: '🌨️' }, 75: { icon: '❄️' },
+                95: { icon: '⛈️' }, 96: { icon: '️' }, 99: { icon: '⛈️' }
             };
-            
-            return weatherCodes[code] || { icon: '️', desc: 'Desconocido' };
+            return weatherCodes[code] || { icon: '️' };
         }
 
-        // Update countdown
+        function showToast(message, type = 'info', duration = 3000) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+            toast.textContent = message;
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.animation = 'slideDown 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, duration);
+        }
+
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
@@ -1733,122 +1637,97 @@
             }
         }
 
-        // Show section
         function showSection(sectionName, btn) {
-            document.querySelectorAll('.content-section').forEach(section => {
-                section.classList.remove('active');
-            });
-            
-            document.querySelectorAll('.nav-btn').forEach(b => {
-                b.classList.remove('active');
-            });
-            
+            document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
             document.getElementById(sectionName).classList.add('active');
             if (btn) btn.classList.add('active');
         }
 
-        // Open webcam in new window
         function openWebcam() {
             window.open('https://www.skylinewebcams.com/es/webcam/italia/lombardia/milano/duomo-milano.html', '_blank');
+            showToast('📹 Abriendo webcam en vivo...', 'info');
         }
 
-        // Open file in new window (for plano and metro)
         function openFile(fileName) {
             window.open('./' + fileName, '_blank');
+            showToast(`📂 Abriendo ${fileName}...`, 'info');
         }
 
-        // Open image in new window
         function openImage(fileName) {
             window.open('./' + fileName, '_blank');
+            showToast(`🖼️ Abriendo imagen: ${fileName}`, 'info');
         }
 
-        // Show visita content
         function showVisita(visitaId) {
-            // Hide all visita contents
-            document.querySelectorAll('.visita-content').forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            // Show selected visita
+            document.querySelectorAll('.visita-content').forEach(c => c.classList.remove('active'));
             document.getElementById(visitaId).classList.add('active');
+            const titles = {
+                'sabado-tarde': 'Sábado Tarde',
+                'domingo-manana': 'Domingo Mañana',
+                'domingo-tarde': 'Domingo Tarde',
+                'lunes-manana': 'Lunes Mañana'
+            };
+            showToast(`🏛️ Mostrando: ${titles[visitaId]}`, 'success');
         }
 
-        // Back to visitas main menu
         function backToVisitas() {
-            // Hide all visita contents
-            document.querySelectorAll('.visita-content').forEach(content => {
-                content.classList.remove('active');
-            });
+            document.querySelectorAll('.visita-content').forEach(c => c.classList.remove('active'));
+            showToast('⬅️ Volviendo al menú principal', 'info');
         }
 
-        // Open Google Maps link
         function openGoogleMaps(suffix) {
             const link = googleMapsLinks[suffix];
             if (link) {
                 window.open(link, '_blank');
+                showToast('📍 Abriendo ubicación en Google Maps...', 'info');
             }
         }
 
-        // Open seat modal
         function openSeatModal(seatNumber) {
             const modal = document.getElementById('seatModal');
             const img = document.getElementById('seatImage');
             const errorMsg = document.getElementById('errorMessage');
             
-            // Reset error state
             img.classList.remove('error');
             errorMsg.classList.remove('show');
             
-            // Set image source
             const imagePath = `./alsa${seatNumber}.jpg`;
             img.src = imagePath;
             img.alt = `Asiento ${seatNumber} ALSA`;
             
-            // Handle image load error
             img.onerror = function() {
                 img.classList.add('error');
                 errorMsg.classList.add('show');
-                console.error(`No se pudo cargar la imagen: ${imagePath}`);
+                showToast('⚠️ No se encontró la imagen del asiento', 'error');
             };
             
-            // Handle successful load
             img.onload = function() {
-                console.log(`Imagen cargada correctamente: ${imagePath}`);
+                showToast(`🎫 Asiento ${seatNumber} cargado`, 'success');
             };
             
             modal.classList.add('active');
         }
 
-        // Close seat modal
         function closeSeatModal() {
-            const modal = document.getElementById('seatModal');
-            modal.classList.remove('active');
+            document.getElementById('seatModal').classList.remove('active');
         }
 
-        // Close modal when clicking outside
         document.getElementById('seatModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeSeatModal();
-            }
+            if (e.target === this) closeSeatModal();
         });
 
-        // Get trip order number from document name
         function getTripOrder(docName) {
             const match = docName.match(/(\d{4})$/);
-            if (match) {
-                const number = match[1];
-                return tripOrder[number] || 999;
-            }
+            if (match) return tripOrder[match[1]] || 999;
             return 999;
         }
 
-        // Get trip suffix from document name
         function getTripSuffix(docName) {
             const match = docName.match(/(\d{4})$/);
             return match ? match[1] : null;
         }
 
-        // Apply filters
         function applyFilters() {
             const travelerFilter = document.getElementById('travelerFilter').value;
             const transportFilter = document.getElementById('transportFilter').value;
@@ -1863,34 +1742,31 @@
                 filteredDocs = filteredDocs.filter(doc => doc.transport === transportFilter || doc.transport === 'all');
             }
             
-            filteredDocs.sort((a, b) => {
-                const orderA = getTripOrder(a.name);
-                const orderB = getTripOrder(b.name);
-                return orderA - orderB;
-            });
+            filteredDocs.sort((a, b) => getTripOrder(a.name) - getTripOrder(b.name));
             
             const trainMessage = document.getElementById('trainMessage');
-            if (transportFilter === 'train') {
-                trainMessage.classList.add('show');
-            } else {
-                trainMessage.classList.remove('show');
-            }
+            trainMessage.classList.toggle('show', transportFilter === 'train');
             
             if (!travelerFilter || !transportFilter) {
                 document.getElementById('filterInfo').innerHTML = 'Selecciona un viajero y tipo de transporte para ver los documentos';
             } else {
-                const travelerText = travelerFilter;
-                const transportText = transportFilter === 'bus' ? 'autobús' : 
-                                     transportFilter === 'train' ? 'tren' : 'avión';
-                
+                const transportText = transportFilter === 'bus' ? 'autobús' : transportFilter === 'train' ? 'tren' : 'avión';
                 document.getElementById('filterInfo').innerHTML = 
-                    `Mostrando <strong>${filteredDocs.length} documentos</strong> de <strong>${travelerText}</strong> en <strong>${transportText}</strong>`;
+                    `Mostrando <strong>${filteredDocs.length} documentos</strong> de <strong>${travelerFilter}</strong> en <strong>${transportText}</strong>`;
             }
             
             renderDocuments(filteredDocs);
         }
 
-        // Render documents
+        // Parsea el horario "HH:MM - HH:MM" y devuelve HTML con colores
+        function renderSchedule(schedule) {
+            const parts = schedule.split(' - ');
+            if (parts.length === 2) {
+                return `<span class="schedule-departure">${parts[0].trim()}</span><span class="schedule-separator"> - </span><span class="schedule-arrival">${parts[1].trim()}</span>`;
+            }
+            return schedule;
+        }
+
         function renderDocuments(docsToRender = documents) {
             const grid = document.getElementById('documentsGrid');
             grid.innerHTML = '';
@@ -1911,58 +1787,74 @@
                                       doc.transport === 'train' ? '<span class="transport-badge train">Tren</span>' : 
                                       doc.transport === 'plane' ? '<span class="transport-badge plane">Avión</span>' : '';
                 
-                // Build extra info for bus tickets
-                let extraInfo = '';
+                // Para bus: NO mostrar nombre del archivo, mostrar icono + badge + ruta + horario coloreado + asiento
+                let cardContent = '';
+                
                 if (doc.transport === 'bus') {
                     const suffix = getTripSuffix(doc.name);
                     const tripInfo = busTripInfo[suffix];
                     const seat = seatNumbers[doc.category] ? seatNumbers[doc.category][suffix] : null;
                     
+                    let extraInfo = '';
                     if (tripInfo) {
                         extraInfo = `
                             <div class="doc-route" onclick="openGoogleMaps('${suffix}')">📍 ${tripInfo.route}</div>
-                            <div class="doc-schedule">🕐 ${tripInfo.schedule}</div>
-                            ${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})">🎫 Asiento ${seat}</div>` : ''}
+                            <div class="doc-schedule">🕐 ${renderSchedule(tripInfo.schedule)}</div>
+                            ${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})"> Asiento ${seat}</div>` : ''}
                         `;
                     }
+                    
+                    cardContent = `
+                        <div class="doc-icon">${doc.icon || '🚌'}</div>
+                        <div class="doc-name">${transportBadge}</div>
+                        ${extraInfo}
+                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
+                    `;
+                } else {
+                    // Para otros transportes: mostrar nombre del archivo como antes
+                    cardContent = `
+                        <div class="doc-icon">${doc.icon || ''}</div>
+                        <div class="doc-name">${doc.name} ${transportBadge}</div>
+                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
+                    `;
                 }
                 
-                card.innerHTML = `
-                    <div class="doc-icon">${doc.icon || '🚌'}</div>
-                    <div class="doc-name">${doc.name} ${transportBadge}</div>
-                    ${extraInfo}
-                    <button class="download-btn" onclick="openPDF('${doc.name}')">Descargar</button>
-                `;
+                card.innerHTML = cardContent;
                 grid.appendChild(card);
             });
         }
 
-        // Open PDF or JPG in new window
-        function openPDF(docName) {
+        function downloadFile(docName, btn) {
             const isFlight = docName.toLowerCase().includes('vuelo');
             const extension = isFlight ? '.jpg' : '.pdf';
             const fileName = docName.endsWith(extension) ? docName : docName + extension;
             
+            btn.classList.add('downloading');
+            btn.textContent = '⏳ Descargando...';
+            
             try {
                 const filePath = './' + fileName;
                 window.open(filePath, '_blank');
+                showToast(`✅ ${fileName} descargado`, 'success');
+                
+                setTimeout(() => {
+                    btn.classList.remove('downloading');
+                    btn.textContent = 'Descargar';
+                }, 2000);
             } catch (error) {
-                alert('Error al abrir el archivo: ' + error.message);
+                showToast('❌ Error al descargar', 'error');
+                btn.classList.remove('downloading');
+                btn.textContent = 'Descargar';
             }
         }
 
-        // Toggle phrase category
         function toggleCategory(headerElement) {
             const categoryDiv = headerElement.closest('.phrase-category');
             const content = categoryDiv.querySelector('.phrase-category-content');
             const isActive = headerElement.classList.contains('active');
             
-            document.querySelectorAll('.phrase-category-header').forEach(h => {
-                h.classList.remove('active');
-            });
-            document.querySelectorAll('.phrase-category-content').forEach(c => {
-                c.classList.remove('active');
-            });
+            document.querySelectorAll('.phrase-category-header').forEach(h => h.classList.remove('active'));
+            document.querySelectorAll('.phrase-category-content').forEach(c => c.classList.remove('active'));
             
             if (!isActive) {
                 headerElement.classList.add('active');
@@ -1970,10 +1862,22 @@
             }
         }
 
-        // Render phrases by category
         function renderPhrases() {
             const container = document.getElementById('phrasesContainer');
             container.innerHTML = '';
+            
+            const searchInput = document.createElement('input');
+            searchInput.type = 'text';
+            searchInput.className = 'phrase-search';
+            searchInput.placeholder = '🔍 Buscar frase...';
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
+                document.querySelectorAll('.phrase-item').forEach(item => {
+                    const text = item.textContent.toLowerCase();
+                    item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
+                });
+            });
+            container.appendChild(searchInput);
             
             const categoryIcons = {
                 'Saludos y Cortesía': '👋',
@@ -2037,11 +1941,9 @@
             }
         }
 
-        // Speak phrase using Web Speech API
         function speakPhrase(text) {
             if ('speechSynthesis' in window) {
                 speechSynthesis.cancel();
-                
                 const utterance = new SpeechSynthesisUtterance(text);
                 utterance.lang = 'it-IT';
                 utterance.rate = 0.8;
@@ -2049,27 +1951,70 @@
                 
                 const voices = speechSynthesis.getVoices();
                 const italianVoice = voices.find(v => v.lang.startsWith('it'));
-                if (italianVoice) {
-                    utterance.voice = italianVoice;
-                }
+                if (italianVoice) utterance.voice = italianVoice;
                 
                 speechSynthesis.speak(utterance);
+                showToast(`🔊 Reproduciendo: "${text}"`, 'info', 2000);
             } else {
-                alert('Tu navegador no soporta la síntesis de voz');
+                showToast('❌ Tu navegador no soporta la síntesis de voz', 'error');
             }
         }
 
-        // Load voices
         if ('speechSynthesis' in window) {
             speechSynthesis.onvoiceschanged = function() {
                 speechSynthesis.getVoices();
             };
         }
 
-        // Render checklist
+        function saveChecklistState() {
+            const checkedItems = [];
+            document.querySelectorAll('.checklist-item input:checked').forEach((checkbox, index) => {
+                checkedItems.push(index);
+            });
+            localStorage.setItem('checklistState', JSON.stringify(checkedItems));
+        }
+
+        function loadChecklistState() {
+            const saved = localStorage.getItem('checklistState');
+            if (saved) {
+                const checkedItems = JSON.parse(saved);
+                document.querySelectorAll('.checklist-item input').forEach((checkbox, index) => {
+                    if (checkedItems.includes(index)) {
+                        checkbox.checked = true;
+                        checkbox.parentElement.classList.add('checked');
+                    }
+                });
+                updateChecklistProgress();
+            }
+        }
+
+        function updateChecklistProgress() {
+            const total = document.querySelectorAll('.checklist-item').length;
+            const completed = document.querySelectorAll('.checklist-item.checked').length;
+            const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
+            
+            const progressContainer = document.querySelector('.checklist-progress');
+            if (!progressContainer) return;
+            
+            const progressBar = progressContainer.querySelector('.checklist-progress-fill');
+            if (progressBar) {
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${completed}/${total} (${percentage}%)`;
+            }
+        }
+
         function renderChecklist() {
             const container = document.getElementById('checklistContainer');
             container.innerHTML = '';
+            
+            const progressDiv = document.createElement('div');
+            progressDiv.className = 'checklist-progress';
+            progressDiv.innerHTML = `
+                <div class="checklist-progress-bar">
+                    <div class="checklist-progress-fill" style="width: 0%">0/0 (0%)</div>
+                </div>
+            `;
+            container.appendChild(progressDiv);
             
             checklistItems.forEach((category, catIndex) => {
                 const catDiv = document.createElement('div');
@@ -2082,27 +2027,52 @@
                 category.items.forEach((item, itemIndex) => {
                     const itemDiv = document.createElement('div');
                     itemDiv.className = 'checklist-item';
+                    const globalIndex = catIndex * 10 + itemIndex;
                     itemDiv.innerHTML = `
-                        <input type="checkbox" id="item-${catIndex}-${itemIndex}" 
-                               onchange="toggleCheck(this)">
-                        <label for="item-${catIndex}-${itemIndex}">${item}</label>
+                        <input type="checkbox" id="item-${globalIndex}" onchange="toggleCheck(this)">
+                        <label for="item-${globalIndex}">${item}</label>
                     `;
                     catDiv.appendChild(itemDiv);
                 });
                 
                 container.appendChild(catDiv);
             });
+            
+            loadChecklistState();
         }
 
-        // Toggle checklist item
         function toggleCheck(checkbox) {
             const item = checkbox.parentElement;
             if (checkbox.checked) {
                 item.classList.add('checked');
+                showToast('✅ Progreso guardado', 'success', 1500);
             } else {
                 item.classList.remove('checked');
             }
+            updateChecklistProgress();
+            saveChecklistState();
         }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.ctrlKey || e.metaKey) {
+                switch(e.key) {
+                    case '1':
+                        e.preventDefault();
+                        showSection('documents', document.querySelector('.nav-btn'));
+                        showToast('⌨️ Atajo: Billetes', 'info', 1500);
+                        break;
+                    case '2':
+                        e.preventDefault();
+                        openWebcam();
+                        break;
+                    case '3':
+                        e.preventDefault();
+                        showSection('phrases', document.querySelectorAll('.nav-btn')[4]);
+                        showToast('⌨️ Atajo: Frases', 'info', 1500);
+                        break;
+                }
+            }
+        });
     </script>
 </body>
 </html>
