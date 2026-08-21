@@ -5,6 +5,38 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Viaje a Milán Octubre 2026</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;900&display=swap');
+
+        :root {
+            --bg-primary: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            --bg-secondary: white;
+            --bg-card: white;
+            --text-primary: #333;
+            --text-secondary: #666;
+            --text-light: #999;
+            --border-color: #e0e0e0;
+            --shadow: rgba(0,0,0,0.2);
+            --header-bg: rgba(255,255,255,0.95);
+            --input-bg: white;
+            --filter-bg: #f8f9fa;
+            --timeline-line: #667eea;
+        }
+
+        body.dark-mode {
+            --bg-primary: linear-gradient(135deg, #0f1b3d 0%, #1a2a5e 100%);
+            --bg-secondary: #1e2a4a;
+            --bg-card: #253358;
+            --text-primary: #f0f0f0;
+            --text-secondary: #b0b0b0;
+            --text-light: #888;
+            --border-color: #3a4a7a;
+            --shadow: rgba(0,0,0,0.5);
+            --header-bg: rgba(30, 42, 74, 0.95);
+            --input-bg: #253358;
+            --filter-bg: #2a3a6a;
+            --timeline-line: #8b9cf7;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,9 +45,10 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            background: var(--bg-primary);
             min-height: 100vh;
-            color: #333;
+            color: var(--text-primary);
+            transition: background 0.3s, color 0.3s;
         }
 
         .login-screen {
@@ -138,10 +171,6 @@
             transform: translateY(-2px);
         }
 
-        .key-btn:active {
-            transform: translateY(0);
-        }
-
         .key-btn.delete { background: #e74c3c; }
         .key-btn.delete:hover { background: #c0392b; }
         .key-btn.ok { background: #00c853; }
@@ -160,20 +189,102 @@
 
         .main-app { display: none; }
 
+        /* HEADER CON TÍTULO DESTACADO */
         .header {
-            background: rgba(255,255,255,0.95);
-            padding: 15px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+            padding: 25px 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4);
             position: sticky;
             top: 0;
             z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .header-title-container {
+            flex: 1;
+            text-align: center;
+            position: relative;
         }
 
         .header h1 {
-            text-align: center;
-            color: #2a5298;
-            font-size: 22px;
-            margin-bottom: 5px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 8px;
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 25%, #ff4500 50%, #ffd700 75%, #ff8c00 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            text-shadow: none;
+            filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.5)) drop-shadow(0 2px 4px rgba(0,0,0,0.8));
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            line-height: 1.2;
+        }
+
+        @keyframes shimmer {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+
+        .header-subtitle {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 14px;
+            color: #ffd700;
+            font-weight: 600;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(ellipse at center, rgba(255, 215, 0, 0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        body.dark-mode .header h1 {
+            background: linear-gradient(135deg, #ffd700 0%, #ff8c00 25%, #ff4500 50%, #ffd700 75%, #ff8c00 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: shimmer 3s linear infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.7)) drop-shadow(0 2px 4px rgba(0,0,0,0.9));
+        }
+
+        body.dark-mode .header {
+            background: linear-gradient(135deg, #0a0a1a 0%, #1a1a3e 50%, #0f1a40 100%);
+            border-bottom: 3px solid #ffd700;
+        }
+
+        .theme-toggle {
+            background: rgba(255, 215, 0, 0.2);
+            border: 2px solid #ffd700;
+            border-radius: 20px;
+            padding: 6px 12px;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            background: rgba(255, 215, 0, 0.3);
         }
 
         .weather-display {
@@ -238,68 +349,114 @@
 
         .countdown-container {
             background: linear-gradient(135deg, #ff9a56 0%, #ffb347 100%);
-            padding: 15px 10px;
+            padding: 20px 10px;
             text-align: center;
             color: white;
         }
 
         .countdown-container h2 {
-            margin-bottom: 12px;
-            font-size: 18px;
+            margin-bottom: 20px;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 15px;
             flex-wrap: wrap;
         }
 
         .countdown-item {
             background: rgba(255,255,255,0.25);
-            padding: 8px 12px;
-            border-radius: 8px;
-            min-width: 65px;
+            padding: 15px 20px;
+            border-radius: 15px;
+            min-width: 80px;
+            box-shadow: 
+                0 10px 20px rgba(0,0,0,0.1),
+                inset 0 -5px 10px rgba(0,0,0,0.1),
+                inset 0 5px 10px rgba(255,255,255,0.3);
+            transform: perspective(500px) rotateX(10deg);
+            transition: transform 0.3s;
+        }
+
+        .countdown-item:hover {
+            transform: perspective(500px) rotateX(0deg) translateY(-5px);
         }
 
         .countdown-number {
-            font-size: 28px;
+            font-size: 36px;
             font-weight: bold;
             display: block;
             line-height: 1;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
         }
 
         .countdown-label {
-            font-size: 11px;
+            font-size: 12px;
             text-transform: uppercase;
-            margin-top: 2px;
+            margin-top: 5px;
+            font-weight: 600;
         }
 
         .nav-menu {
-            background: white;
-            padding: 10px;
+            background: var(--bg-secondary);
+            padding: 15px;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 8px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            gap: 10px;
+            box-shadow: 0 2px 10px var(--shadow);
         }
 
         .nav-btn {
-            padding: 10px 15px;
-            background: #667eea;
+            padding: 12px 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
-            font-size: 13px;
+            font-size: 14px;
+            font-weight: 600;
             transition: all 0.3s;
             white-space: nowrap;
+            box-shadow: 
+                0 4px 15px rgba(102, 126, 234, 0.4),
+                inset 0 2px 5px rgba(255,255,255,0.3),
+                inset 0 -2px 5px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        .nav-btn:hover, .nav-btn.active {
-            background: #2a5298;
-            transform: translateY(-2px);
+        .nav-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 
+                0 8px 25px rgba(102, 126, 234, 0.6),
+                inset 0 2px 5px rgba(255,255,255,0.3),
+                inset 0 -2px 5px rgba(0,0,0,0.1);
+        }
+
+        .nav-btn.active {
+            background: linear-gradient(135deg, #2a5298 0%, #1e3c72 100%);
+            box-shadow: 
+                0 4px 15px rgba(42, 82, 152, 0.4),
+                inset 0 2px 5px rgba(255,255,255,0.2),
+                inset 0 -2px 5px rgba(0,0,0,0.2);
         }
 
         .content-section {
@@ -318,17 +475,21 @@
             text-align: center;
         }
 
+        body.dark-mode .section-title {
+            color: #e0e0e0;
+        }
+
         .filters-container {
-            background: white;
+            background: var(--bg-card);
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px var(--shadow);
         }
 
         .filters-title {
             font-size: 18px;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 15px;
             font-weight: 600;
         }
@@ -346,18 +507,20 @@
 
         .filter-group label {
             font-weight: 600;
-            color: #555;
+            color: var(--text-secondary);
             margin-bottom: 6px;
             font-size: 13px;
         }
 
         .filter-group select {
             padding: 10px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
             cursor: pointer;
             transition: border-color 0.3s;
+            background: var(--input-bg);
+            color: var(--text-primary);
         }
 
         .filter-group select:focus {
@@ -368,10 +531,10 @@
         .filter-info {
             margin-top: 15px;
             padding: 12px;
-            background: #f8f9fa;
+            background: var(--filter-bg);
             border-radius: 8px;
             text-align: center;
-            color: #666;
+            color: var(--text-secondary);
             font-size: 13px;
         }
 
@@ -388,15 +551,14 @@
             animation: slideDown 0.3s ease;
         }
 
+        body.dark-mode .train-info-container {
+            background: linear-gradient(135deg, #3d3520 0%, #4a3f20 100%);
+            color: #f0e0a0;
+        }
+
         @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .train-info-container.pulse {
@@ -404,12 +566,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% {
-                box-shadow: 0 3px 10px rgba(253, 203, 110, 0.4);
-            }
-            50% {
-                box-shadow: 0 5px 15px rgba(253, 203, 110, 0.6);
-            }
+            0%, 100% { box-shadow: 0 3px 10px rgba(253, 203, 110, 0.4); }
+            50% { box-shadow: 0 5px 15px rgba(253, 203, 110, 0.6); }
         }
 
         .train-close-btn {
@@ -446,6 +604,10 @@
             margin-bottom: 15px;
         }
 
+        body.dark-mode .train-message {
+            color: #f0e0a0;
+        }
+
         .train-schedules-wrapper {
             display: flex;
             gap: 15px;
@@ -462,13 +624,13 @@
             line-height: 1.6;
         }
 
-        .train-schedule-box.ida {
-            border-left: 4px solid #27ae60;
+        body.dark-mode .train-schedule-box {
+            background: rgba(0,0,0,0.3);
+            color: #f0e0a0;
         }
 
-        .train-schedule-box.vuelta {
-            border-left: 4px solid #e74c3c;
-        }
+        .train-schedule-box.ida { border-left: 4px solid #27ae60; }
+        .train-schedule-box.vuelta { border-left: 4px solid #e74c3c; }
 
         .train-schedule-box strong {
             display: block;
@@ -476,13 +638,8 @@
             font-size: 14px;
         }
 
-        .train-schedule-box.ida strong {
-            color: #27ae60;
-        }
-
-        .train-schedule-box.vuelta strong {
-            color: #e74c3c;
-        }
+        .train-schedule-box.ida strong { color: #27ae60; }
+        .train-schedule-box.vuelta strong { color: #e74c3c; }
 
         .documents-grid {
             display: flex;
@@ -494,10 +651,10 @@
         }
 
         .doc-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 10px;
             padding: 12px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 15px var(--shadow);
             cursor: pointer;
             transition: all 0.3s;
             text-align: center;
@@ -510,31 +667,22 @@
 
         .doc-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            box-shadow: 0 8px 25px var(--shadow);
         }
 
         .doc-card.bus { border-left-color: #f39c12; }
         .doc-card.train { border-left-color: #27ae60; }
         .doc-card.plane { border-left-color: #3498db; }
 
-        .doc-icon {
-            font-size: 30px;
-            margin-bottom: 6px;
-        }
-
+        .doc-icon { font-size: 30px; margin-bottom: 6px; }
         .doc-name {
             font-weight: bold;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 4px;
             font-size: 12px;
             word-break: break-word;
         }
-
-        .doc-type {
-            color: #666;
-            font-size: 10px;
-            margin-bottom: 2px;
-        }
+        .doc-type { color: var(--text-secondary); font-size: 10px; margin-bottom: 2px; }
 
         .doc-route {
             font-weight: 600;
@@ -549,32 +697,17 @@
             text-decoration: underline;
         }
 
-        .doc-route:hover {
-            background: #bbdefb;
-            color: #1565c0;
+        body.dark-mode .doc-route {
+            background: #2a3a6a;
+            color: #8b9cf7;
         }
 
-        .doc-schedule {
-            font-size: 11px;
-            margin: 2px 0;
-            font-weight: 600;
-        }
+        .doc-route:hover { background: #bbdefb; color: #1565c0; }
 
-        .schedule-departure {
-            color: #27ae60;
-            font-weight: bold;
-        }
-
-        .schedule-separator {
-            color: #f1c40f;
-            font-weight: bold;
-            margin: 0 3px;
-        }
-
-        .schedule-arrival {
-            color: #e74c3c;
-            font-weight: bold;
-        }
+        .doc-schedule { font-size: 11px; margin: 2px 0; font-weight: 600; color: var(--text-primary); }
+        .schedule-departure { color: #27ae60; font-weight: bold; }
+        .schedule-separator { color: #f1c40f; font-weight: bold; margin: 0 3px; }
+        .schedule-arrival { color: #e74c3c; font-weight: bold; }
 
         .doc-seat {
             color: #fff;
@@ -588,10 +721,7 @@
             transition: all 0.2s;
         }
 
-        .doc-seat:hover {
-            background: #e67e22;
-            transform: scale(1.05);
-        }
+        .doc-seat:hover { background: #e67e22; transform: scale(1.05); }
 
         .download-btn {
             margin-top: 8px;
@@ -623,12 +753,8 @@
         }
 
         @keyframes baggagePulse {
-            0%, 100% {
-                box-shadow: 0 8px 25px rgba(238, 90, 111, 0.4);
-            }
-            50% {
-                box-shadow: 0 12px 35px rgba(238, 90, 111, 0.6);
-            }
+            0%, 100% { box-shadow: 0 8px 25px rgba(238, 90, 111, 0.4); }
+            50% { box-shadow: 0 12px 35px rgba(238, 90, 111, 0.6); }
         }
 
         .baggage-card img {
@@ -658,12 +784,401 @@
             text-align: center;
         }
 
-        .visitas-container {
-            background: white;
+        .restaurant-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 
+                0 10px 30px rgba(0,0,0,0.15),
+                inset 0 2px 5px rgba(255,255,255,0.5);
+            border-left: 5px solid #e74c3c;
+            transform: perspective(500px) rotateY(-5deg);
+            transition: transform 0.3s;
+        }
+
+        .restaurant-card:hover {
+            transform: perspective(500px) rotateY(0deg) translateY(-5px);
+        }
+
+        .restaurant-name {
+            font-weight: bold;
+            color: var(--text-primary);
+            font-size: 20px;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-type {
+            color: #e74c3c;
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-info {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .restaurant-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .restaurant-btn {
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+        }
+
+        .restaurant-btn.web {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .restaurant-btn.web:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .restaurant-btn.menu {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+            color: white;
+        }
+
+        .restaurant-btn.menu:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(39, 174, 96, 0.4);
+        }
+
+        .restaurant-btn.maps {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            color: white;
+        }
+
+        .restaurant-btn.maps:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(52, 152, 219, 0.4);
+        }
+
+        .restaurant-specialty {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: #856404;
+            display: inline-block;
+            margin-top: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        body.dark-mode .restaurant-specialty {
+            background: linear-gradient(135deg, #3d3520 0%, #4a3f20 100%);
+            color: #f0e0a0;
+        }
+
+        .transport-info-container {
+            background: var(--bg-card);
             border-radius: 12px;
             padding: 20px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px var(--shadow);
+        }
+
+        .transport-section {
+            margin-bottom: 25px;
+        }
+
+        .transport-section h3 {
+            color: #667eea;
+            font-size: 18px;
+            margin-bottom: 12px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid #667eea;
+        }
+
+        .transport-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 12px;
+        }
+
+        .transport-card {
+            background: var(--filter-bg);
+            padding: 15px;
+            border-radius: 8px;
             text-align: center;
+        }
+
+        .transport-card-icon {
+            font-size: 30px;
+            margin-bottom: 8px;
+        }
+
+        .transport-card-title {
+            font-weight: bold;
+            color: var(--text-primary);
+            font-size: 14px;
+            margin-bottom: 5px;
+        }
+
+        .transport-card-price {
+            color: #27ae60;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .transport-card-desc {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        .transport-tip {
+            background: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 12px;
+            border-radius: 5px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #2c3e50;
+        }
+
+        body.dark-mode .transport-tip {
+            background: #1e3a5f;
+            color: #b0d4f1;
+        }
+
+        .transport-link-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            margin-top: 10px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .transport-link-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+
+        .map-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 15px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .map-btn {
+            flex: 1;
+            min-width: 200px;
+            max-width: 300px;
+            background: var(--filter-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 15px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-align: center;
+            box-shadow: 
+                0 5px 15px rgba(0,0,0,0.1),
+                inset 0 2px 5px rgba(255,255,255,0.5);
+        }
+
+        .map-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border-color: #667eea;
+        }
+
+        .map-btn img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .map-btn-text {
+            font-weight: 600;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .emergency-fab {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 
+                0 6px 20px rgba(231, 76, 60, 0.5),
+                inset 0 2px 5px rgba(255,255,255,0.3);
+            z-index: 999;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: emergencyPulse 2s infinite;
+        }
+
+        @keyframes emergencyPulse {
+            0%, 100% { box-shadow: 0 6px 20px rgba(231, 76, 60, 0.5), inset 0 2px 5px rgba(255,255,255,0.3); }
+            50% { box-shadow: 0 8px 30px rgba(231, 76, 60, 0.8), inset 0 2px 5px rgba(255,255,255,0.3); }
+        }
+
+        .emergency-fab:hover {
+            transform: scale(1.1);
+        }
+
+        .emergency-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 10000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .emergency-modal.active { display: flex; }
+
+        .emergency-modal-content {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 25px;
+            max-width: 500px;
+            width: 100%;
+            max-height: 80vh;
+            overflow-y: auto;
+            position: relative;
+        }
+
+        .emergency-modal h2 {
+            color: #e74c3c;
+            margin-bottom: 20px;
+            text-align: center;
+            font-size: 22px;
+        }
+
+        .emergency-item {
+            display: flex;
+            align-items: center;
+            padding: 12px;
+            margin-bottom: 10px;
+            background: var(--filter-bg);
+            border-radius: 8px;
+            border-left: 4px solid #e74c3c;
+        }
+
+        .emergency-item.important {
+            border-left-color: #c0392b;
+            background: #ffeaea;
+        }
+
+        body.dark-mode .emergency-item.important {
+            background: #3d2020;
+        }
+
+        .emergency-icon {
+            font-size: 24px;
+            margin-right: 12px;
+        }
+
+        .emergency-info {
+            flex: 1;
+        }
+
+        .emergency-label {
+            font-weight: bold;
+            color: var(--text-primary);
+            font-size: 14px;
+        }
+
+        .emergency-number {
+            color: #e74c3c;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        .emergency-address {
+            font-size: 12px;
+            color: var(--text-secondary);
+            margin-top: 3px;
+        }
+
+        .emergency-address a {
+            color: #667eea;
+            text-decoration: underline;
+        }
+
+        .emergency-call-btn {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 12px;
+            text-decoration: none;
+            margin-left: 10px;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+
+        .emergency-call-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
+        }
+
+        .emergency-close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .visitas-container, .phrases-container, .checklist-container {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 5px 20px var(--shadow);
         }
 
         .visitas-title {
@@ -671,6 +1186,11 @@
             color: #2a5298;
             margin-bottom: 20px;
             font-weight: bold;
+            text-align: center;
+        }
+
+        body.dark-mode .visitas-title {
+            color: #8b9cf7;
         }
 
         .visitas-buttons {
@@ -715,7 +1235,7 @@
 
         .visita-subtitle {
             font-size: 18px;
-            color: #333;
+            color: var(--text-primary);
             margin-bottom: 15px;
             font-weight: 600;
         }
@@ -728,17 +1248,17 @@
         }
 
         .image-card {
-            background: white;
+            background: var(--bg-card);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 12px var(--shadow);
             cursor: pointer;
             transition: all 0.3s;
         }
 
         .image-card:hover {
             transform: translateY(-3px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.3);
+            box-shadow: 0 6px 18px var(--shadow);
         }
 
         .image-card img {
@@ -749,15 +1269,15 @@
 
         .image-card .image-name {
             padding: 10px;
-            background: #f8f9fa;
+            background: var(--filter-bg);
             font-weight: 600;
-            color: #333;
+            color: var(--text-primary);
             font-size: 13px;
         }
 
         .back-btn {
             padding: 8px 20px;
-            background: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
             border: none;
             border-radius: 20px;
@@ -766,11 +1286,13 @@
             font-weight: 600;
             margin-bottom: 15px;
             transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
         }
 
-        .back-btn:hover {
-            background: #c0392b;
+        .back-btn:hover { 
+            background: #c0392b; 
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
         }
 
         .modal-overlay {
@@ -790,7 +1312,7 @@
         .modal-overlay.active { display: flex; }
 
         .modal-content {
-            background: white;
+            background: var(--bg-card);
             padding: 25px;
             border-radius: 15px;
             text-align: center;
@@ -811,11 +1333,15 @@
             font-size: 20px;
         }
 
+        body.dark-mode .modal-content h3 {
+            color: #8b9cf7;
+        }
+
         .modal-content img {
             max-width: 100%;
             height: auto;
             border-radius: 10px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 20px var(--shadow);
             min-height: 150px;
         }
 
@@ -827,7 +1353,7 @@
         .modal-close {
             margin-top: 15px;
             padding: 10px 25px;
-            background: #e74c3c;
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
             color: white;
             border: none;
             border-radius: 20px;
@@ -835,11 +1361,13 @@
             font-size: 14px;
             font-weight: 600;
             transition: all 0.3s;
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
         }
 
-        .modal-close:hover {
-            background: #c0392b;
+        .modal-close:hover { 
+            background: #c0392b; 
             transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(231, 76, 60, 0.4);
         }
 
         .error-message {
@@ -854,31 +1382,23 @@
 
         .error-message.show { display: block; }
 
-        .phrases-container {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
         .phrase-search {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
             border-radius: 8px;
             font-size: 14px;
             transition: border-color 0.3s;
+            background: var(--input-bg);
+            color: var(--text-primary);
         }
 
-        .phrase-search:focus {
-            outline: none;
-            border-color: #667eea;
-        }
+        .phrase-search:focus { outline: none; border-color: #667eea; }
 
         .phrase-category {
             margin-bottom: 12px;
-            border: 1px solid #e0e0e0;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
         }
@@ -914,44 +1434,32 @@
             margin-left: 10px;
         }
 
-        .phrase-category-header.active .toggle-icon {
-            transform: rotate(180deg);
-        }
+        .phrase-category-header.active .toggle-icon { transform: rotate(180deg); }
 
         .phrase-category-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s ease;
-            background: #fafafa;
+            background: var(--filter-bg);
         }
 
-        .phrase-category-content.active {
-            max-height: 2000px;
-            padding: 12px;
-        }
+        .phrase-category-content.active { max-height: 2000px; padding: 12px; }
 
         .phrase-item {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 10px 12px;
-            border-bottom: 1px solid #eee;
+            border-bottom: 1px solid var(--border-color);
             flex-wrap: wrap;
             gap: 8px;
             transition: background 0.2s;
         }
 
-        .phrase-item:hover {
-            background: #f0f0f0;
-            border-radius: 5px;
-        }
-
+        .phrase-item:hover { background: rgba(102, 126, 234, 0.1); border-radius: 5px; }
         .phrase-item:last-child { border-bottom: none; }
 
-        .phrase-text {
-            flex: 1;
-            min-width: 150px;
-        }
+        .phrase-text { flex: 1; min-width: 150px; }
 
         .phrase-italian {
             font-weight: bold;
@@ -960,10 +1468,7 @@
             margin-bottom: 2px;
         }
 
-        .phrase-spanish {
-            color: #666;
-            font-size: 12px;
-        }
+        .phrase-spanish { color: var(--text-secondary); font-size: 12px; }
 
         .audio-btn {
             padding: 5px 10px;
@@ -978,17 +1483,10 @@
 
         .audio-btn:hover { background: #5568d3; }
 
-        .checklist-container {
-            background: white;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-        }
-
         .checklist-progress { margin-bottom: 20px; }
 
         .checklist-progress-bar {
-            background: #e0e0e0;
+            background: var(--border-color);
             border-radius: 10px;
             height: 25px;
             overflow: hidden;
@@ -1022,13 +1520,13 @@
             align-items: center;
             padding: 8px;
             margin-bottom: 6px;
-            background: #f8f9fa;
+            background: var(--filter-bg);
             border-radius: 5px;
             cursor: pointer;
             transition: background 0.3s;
         }
 
-        .checklist-item:hover { background: #e9ecef; }
+        .checklist-item:hover { background: var(--border-color); }
 
         .checklist-item input[type="checkbox"] {
             margin-right: 12px;
@@ -1037,10 +1535,7 @@
             cursor: pointer;
         }
 
-        .checklist-item.checked {
-            opacity: 0.6;
-            text-decoration: line-through;
-        }
+        .checklist-item.checked { opacity: 0.6; text-decoration: line-through; }
 
         .weather-info {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1051,17 +1546,8 @@
             text-align: center;
         }
 
-        .weather-info h3 {
-            margin-bottom: 8px;
-            font-size: 18px;
-        }
-
-        .weather-temp {
-            font-size: 36px;
-            font-weight: bold;
-            margin: 8px 0;
-        }
-
+        .weather-info h3 { margin-bottom: 8px; font-size: 18px; }
+        .weather-temp { font-size: 36px; font-weight: bold; margin: 8px 0; }
         .weather-info p { font-size: 13px; }
 
         .transport-badge {
@@ -1115,16 +1601,16 @@
         }
 
         @media (max-width: 768px) {
-            .train-schedules-wrapper {
-                flex-direction: column;
-            }
+            .train-schedules-wrapper { flex-direction: column; }
+            .header { flex-direction: column; }
+            .header h1 { font-size: 24px; }
         }
 
         @media (max-width: 480px) {
-            .countdown-item { min-width: 55px; padding: 6px 8px; }
-            .countdown-number { font-size: 24px; }
+            .countdown-item { min-width: 70px; padding: 12px 15px; }
+            .countdown-number { font-size: 28px; }
             .countdown-label { font-size: 10px; }
-            .nav-btn { padding: 8px 12px; font-size: 12px; }
+            .nav-btn { padding: 10px 16px; font-size: 12px; }
             .doc-card { width: 140px; padding: 10px; }
             .doc-icon { font-size: 26px; }
             .doc-name { font-size: 11px; }
@@ -1136,20 +1622,13 @@
             .weather-temp { font-size: 14px; }
             .phrase-search { font-size: 13px; padding: 10px; }
             .baggage-card { width: 160px; }
-            .train-close-btn {
-                width: 24px;
-                height: 24px;
-                font-size: 14px;
-                top: 5px;
-                right: 5px;
-            }
-            .train-message {
-                font-size: 13px;
-            }
-            .train-schedule-box {
-                font-size: 12px;
-                padding: 10px;
-            }
+            .train-close-btn { width: 24px; height: 24px; font-size: 14px; top: 5px; right: 5px; }
+            .train-message { font-size: 13px; }
+            .train-schedule-box { font-size: 12px; padding: 10px; }
+            .emergency-fab { width: 50px; height: 50px; font-size: 24px; bottom: 15px; right: 15px; }
+            .map-buttons { flex-direction: column; }
+            .map-btn { min-width: 100%; max-width: 100%; }
+            .header h1 { font-size: 20px; }
         }
 
         .hidden { display: none !important; }
@@ -1187,7 +1666,7 @@
                 <button class="key-btn" onclick="pressKey('1')">1</button>
                 <button class="key-btn" onclick="pressKey('2')">2</button>
                 <button class="key-btn" onclick="pressKey('3')">3</button>
-                <button class="key-btn delete" onclick="pressKey('delete')">⌫</button>
+                <button class="key-btn delete" onclick="pressKey('delete')"></button>
                 <button class="key-btn" onclick="pressKey('0')">0</button>
                 <button class="key-btn ok" onclick="pressKey('ok')">OK</button>
             </div>
@@ -1198,8 +1677,11 @@
 
     <div class="main-app" id="mainApp">
         <div class="header">
-            <h1>🇮 Viaje a Milán Octubre 2026</h1>
-            <div class="weather-display" id="weatherDisplay" onclick="openWeatherForecast()" title="Ver previsión de los próximos días">
+            <button class="theme-toggle" onclick="toggleTheme()" title="Cambiar tema">🌙</button>
+            <div class="header-title-container">
+                <h1>🇮🇹 Viaje a Milán Octubre 2026 ️</h1>
+            </div>
+            <div class="weather-display" id="weatherDisplay" onclick="openWeatherForecast()">
                 <span class="weather-loading">🌡️ Cargando...</span>
             </div>
         </div>
@@ -1209,37 +1691,36 @@
             <div class="countdown" id="countdown">
                 <div class="countdown-item">
                     <span class="countdown-number" id="days">00</span>
-                    <span class="countdown-label">Días</span>
+                    <span class="countdown-label">DÍAS</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-number" id="hours">00</span>
-                    <span class="countdown-label">Hrs</span>
+                    <span class="countdown-label">HRS</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-number" id="minutes">00</span>
-                    <span class="countdown-label">Min</span>
+                    <span class="countdown-label">MIN</span>
                 </div>
                 <div class="countdown-item">
                     <span class="countdown-number" id="seconds">00</span>
-                    <span class="countdown-label">Seg</span>
+                    <span class="countdown-label">SEG</span>
                 </div>
             </div>
         </div>
 
         <div class="nav-menu">
             <button class="nav-btn active" onclick="showSection('documents', this)">📄 Billetes</button>
-            <button class="nav-btn" onclick="openWebcam()"> Webcam</button>
-            <button class="nav-btn" onclick="openFile('plano milan.jpg')">🗺️ Plano</button>
-            <button class="nav-btn" onclick="openFile('mapa metro milan.jpg')">🚇 Metro</button>
+            <button class="nav-btn" onclick="showSection('transport', this)">🚇 Transporte</button>
+            <button class="nav-btn" onclick="showSection('restaurants', this)">🍝 Restaurantes</button>
+            <button class="nav-btn" onclick="openWebcam()">📹 Webcam</button>
             <button class="nav-btn" onclick="showSection('visitas', this)">🏛️ Visitas</button>
-            <button class="nav-btn" onclick="showSection('phrases', this)"> Frases</button>
+            <button class="nav-btn" onclick="showSection('phrases', this)">💬 Frases</button>
             <button class="nav-btn" onclick="showSection('checklist', this)">✅ Checklist</button>
         </div>
 
         <div class="content-section active" id="documents">
-            <h2 class="section-title"> Billetes y Documentos</h2>
+            <h2 class="section-title">📄 Billetes y Documentos</h2>
             
-            <!-- Train Info Container -->
             <div class="train-info-container pulse" id="trainInfoContainer" style="display: none;">
                 <button class="train-close-btn" onclick="closeTrainInfo()" title="Cerrar">×</button>
                 <div class="train-message">
@@ -1249,7 +1730,7 @@
                     <div class="train-schedule-box ida">
                         <strong> Ida</strong>
                         📍 Salida: Malpensa T1<br>
-                         03/10/2026 a las <strong style="color: #27ae60;">12:41</strong><br>
+                        📅 03/10/2026 a las <strong style="color: #27ae60;">12:41</strong><br>
                         📍 Llegada: Milano Centrale<br>
                         ⏰ <strong style="color: #e74c3c;">13:37</strong>
                     </div>
@@ -1257,7 +1738,7 @@
                         <strong>🚄 Vuelta</strong>
                         📍 Salida: Milano Centrale<br>
                         📅 05/10/2026 a las <strong style="color: #27ae60;">16:25</strong><br>
-                        📍 Llegada: Malpensa T1<br>
+                         Llegada: Malpensa T1<br>
                         ⏰ <strong style="color: #e74c3c;">17:18</strong>
                     </div>
                 </div>
@@ -1276,7 +1757,7 @@
                         </select>
                     </div>
                     <div class="filter-group">
-                        <label for="transportFilter">🚍 Tipo de Transporte:</label>
+                        <label for="transportFilter"> Tipo de Transporte:</label>
                         <select id="transportFilter" onchange="applyFilters()">
                             <option value="">Seleccionar transporte...</option>
                             <option value="bus">🚌 Autobús (ALSA)</option>
@@ -1293,37 +1774,161 @@
             <div class="documents-grid" id="documentsGrid"></div>
         </div>
 
+        <div class="content-section" id="transport">
+            <h2 class="section-title">🚇 Transporte en Milán</h2>
+            <div class="transport-info-container">
+                
+                <div class="transport-section">
+                    <h3>🚇 Metro de Milán (ATM)</h3>
+                    <div class="transport-grid">
+                        <div class="transport-card">
+                            <div class="transport-card-icon">🚇</div>
+                            <div class="transport-card-title">Billete Sencillo</div>
+                            <div class="transport-card-price">2,20€</div>
+                            <div class="transport-card-desc">Válido 90 minutos</div>
+                        </div>
+                        <div class="transport-card">
+                            <div class="transport-card-icon">📅</div>
+                            <div class="transport-card-title">Billete Diario</div>
+                            <div class="transport-card-price">7,60€</div>
+                            <div class="transport-card-desc">Viajes ilimitados 24h</div>
+                        </div>
+                        <div class="transport-card">
+                            <div class="transport-card-icon">🎫</div>
+                            <div class="transport-card-title">Abono 3 días</div>
+                            <div class="transport-card-price">15,50€</div>
+                            <div class="transport-card-desc">Perfecto para nuestro viaje</div>
+                        </div>
+                    </div>
+                    <div class="transport-tip">
+                        💡 Mi consejo es el abono de 3 días
+                    </div>
+                    <div style="text-align: center; margin-top: 15px;">
+                        <a href="https://www.atm.it/it/Pagine/default.aspx" target="_blank" class="transport-link-btn">
+                            🌐 Web oficial ATM Milano
+                        </a>
+                    </div>
+                </div>
+
+                <div class="transport-section">
+                    <h3>🗺️ Planos y Mapas</h3>
+                    <div class="map-buttons">
+                        <button class="map-btn" onclick="openFile('mapa metro milan.jpg')">
+                            <img src="./mapa metro milan.jpg" alt="Mapa Metro" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2210%22%3EMetro%3C/text%3E%3C/svg%3E'">
+                            <span class="map-btn-text">📍 Plano del Metro</span>
+                        </button>
+                        <button class="map-btn" onclick="openFile('plano milan.jpg')">
+                            <img src="./plano milan.jpg" alt="Plano Milán" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2260%22 height=%2260%22%3E%3Crect fill=%22%23ddd%22 width=%2260%22 height=%2260%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 font-size=%2210%22%3EPlano%3C/text%3E%3C/svg%3E'">
+                            <span class="map-btn-text">🗺️ Plano de Milán</span>
+                        </button>
+                    </div>
+                    <div class="transport-tip">
+                        💡 Mi consejo descargar los planos antes de salir para consultarlos sin conexión. (igual que los billetes de bus y de avión (cuando estén lo reales no las reservas)
+                    </div>
+                </div>
+
+                <div class="transport-section">
+                    <h3>🚌 Autobuses Urbanos y Tranvías</h3>
+                    <div class="transport-tip" style="text-align: center; font-weight: bold; font-size: 14px;">
+                        🚌 Los mismos billetes del metro son válidos para autobuses y tranvías de ATM. <br>
+                        <span style="color: #e74c3c; font-size: 16px;">⚠️ El billete debe validarse al subir.</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-section" id="restaurants">
+            <h2 class="section-title">🍝 Restaurantes Recomendados</h2>
+            <div class="itinerary-container">
+                
+                <h3 style="color: #e74c3c; margin-bottom: 15px;">📍 Zona Duomo / Centro</h3>
+                <div class="restaurant-card">
+                    <div class="restaurant-name">Luini</div>
+                    <div class="restaurant-type">Panzerotti y Focaccia</div>
+                    <div class="restaurant-info">📍 Via Santa Radegonda, 16 •  9:00-21:00</div>
+                    <div class="restaurant-info">💰 Precio: 3-6€ por persona</div>
+                    <div class="restaurant-specialty">⭐ Especialidad: Panzerotti rellenos (famoso desde 1950)</div>
+                    <div class="restaurant-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Luini+Via+Santa+Radegonda+16+Milano" target="_blank" class="restaurant-btn maps"> Maps</a>
+                        <a href="https://www.luini.it" target="_blank" class="restaurant-btn web">🌐 Web</a>
+                    </div>
+                </div>
+
+                <h3 style="color: #e74c3c; margin: 25px 0 15px;">📍 Zona Santa Maria / Navigli</h3>
+                <div class="restaurant-card">
+                    <div class="restaurant-name">Osteria del Treno</div>
+                    <div class="restaurant-type">Cocina tradicional milanesa</div>
+                    <div class="restaurant-info">📍 Via Pasquale Sottocorno, 6 • ⏰ 12:00-15:00, 19:00-23:00</div>
+                    <div class="restaurant-info"> Precio: 25-40€ por persona</div>
+                    <div class="restaurant-specialty">⭐ Especialidad: Risotto alla Milanese y Ossobuco</div>
+                    <div class="restaurant-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Osteria+del+Treno+Via+Pasquale+Sottocorno+6+Milano" target="_blank" class="restaurant-btn maps">📍 Maps</a>
+                        <a href="https://www.osteriadeltreno.it/" target="_blank" class="restaurant-btn web">🌐 Web</a>
+                        <a href="https://www.osteriadeltreno.it/menu-cena-fine-settimana/" target="_blank" class="restaurant-btn menu"> Menú</a>
+                    </div>
+                </div>
+
+                <h3 style="color: #e74c3c; margin: 25px 0 15px;">📍 Zona San Siro</h3>
+                <div class="restaurant-card">
+                    <div class="restaurant-name">Bar Sport</div>
+                    <div class="restaurant-type">Bar / Ristorante</div>
+                    <div class="restaurant-info">📍 Piazzale Axum, 8 • ⏰ 7:00-23:00</div>
+                    <div class="restaurant-info">💰 Precio: 12-20€ por persona</div>
+                    <div class="restaurant-specialty">⭐ Especialidad: Panini y Milanesa</div>
+                    <div class="restaurant-links">
+                        <a href="https://www.google.com/maps/place/Bar+Sport/@45.474617,9.2115157,611m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786c7003bd07c1b:0x6a849a1acff0cacd!8m2!3d45.474617!4d9.2140906!16s%2Fg%2F11z67bcxr1?entry=ttu&g_ep=EgoyMDI2MDgxOS4wIKXMDSoASAFQAw%3D%3D" target="_blank" class="restaurant-btn maps">📍 Maps</a>
+                    </div>
+                </div>
+
+                <h3 style="color: #e74c3c; margin: 25px 0 15px;"> Zona Brera / Pinacoteca</h3>
+                <div class="restaurant-card">
+                    <div class="restaurant-name">Nabucco</div>
+                    <div class="restaurant-type">Restaurante italiano</div>
+                    <div class="restaurant-info">📍 Via Fiori Chiari, 10 • ⏰ 12:00-15:00, 19:00-23:30</div>
+                    <div class="restaurant-info">💰 Precio: 25-40€ por persona</div>
+                    <div class="restaurant-specialty">⭐ Especialidad: Pasta fresca y carpaccio</div>
+                    <div class="restaurant-links">
+                        <a href="https://www.google.com/maps/search/?api=1&query=Nabucco+Via+Fiori+Chiari+10+Milano" target="_blank" class="restaurant-btn maps"> Maps</a>
+                        <a href="https://www.nabucco.it" target="_blank" class="restaurant-btn web">🌐 Web</a>
+                        <a href="https://www.nabucco.it/menu" target="_blank" class="restaurant-btn menu">📋 Menú</a>
+                    </div>
+                </div>
+
+                <div class="transport-tip" style="margin-top: 20px;">
+                    💡 <strong>Consejo:</strong> En Italia la cena suele ser a partir de las 20:00. Los restaurantes más populares requieren reserva, especialmente los fines de semana.
+                </div>
+            </div>
+        </div>
+
         <div class="content-section" id="visitas">
-            <h2 class="section-title">️ Visitas y Lugares</h2>
-            
+            <h2 class="section-title">🏛️ Visitas y Lugares</h2>
             <div class="visitas-container">
                 <div class="visitas-title">Selecciona el periodo</div>
-                
-                <div class="visitas-buttons" id="visitasButtons">
+                <div class="visitas-buttons">
                     <button class="visita-btn" onclick="showVisita('sabado-tarde')">🌅 SÁBADO TARDE</button>
                     <button class="visita-btn" onclick="showVisita('domingo-manana')">☀️ DOMINGO MAÑANA</button>
                     <button class="visita-btn" onclick="showVisita('domingo-tarde')">🌆 DOMINGO TARDE</button>
-                    <button class="visita-btn" onclick="showVisita('lunes-manana')"> LUNES MAÑANA</button>
+                    <button class="visita-btn" onclick="showVisita('lunes-manana')">🌄 LUNES MAÑANA</button>
                 </div>
 
                 <div class="visita-content" id="sabado-tarde">
                     <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
-                    <div class="visita-subtitle"> Sábado Tarde</div>
+                    <div class="visita-subtitle">🌅 Sábado Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('duomo milan.jpg')">
-                            <img src="./duomo milan.jpg" alt="Duomo Milan" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EDuomo Milan%3C/text%3E%3C/svg%3E'">
+                            <img src="./duomo milan.jpg" alt="Duomo Milan" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Duomo Milan</div>
                         </div>
                         <div class="image-card" onclick="openImage('terraza duomo.jpg')">
-                            <img src="./terraza duomo.jpg" alt="Terraza Duomo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETerraza Duomo%3C/text%3E%3C/svg%3E'">
+                            <img src="./terraza duomo.jpg" alt="Terraza Duomo" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Terraza Duomo</div>
                         </div>
                         <div class="image-card" onclick="openImage('palacio real.jpg')">
-                            <img src="./palacio real.jpg" alt="Palacio Real" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPalacio Real%3C/text%3E%3C/svg%3E'">
+                            <img src="./palacio real.jpg" alt="Palacio Real" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Palacio Real</div>
                         </div>
                         <div class="image-card" onclick="openImage('teatro della scala.jpg')">
-                            <img src="./teatro della scala.jpg" alt="Teatro della Scala" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ETeatro della Scala%3C/text%3E%3C/svg%3E'">
+                            <img src="./teatro della scala.jpg" alt="Teatro della Scala" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Teatro della Scala</div>
                         </div>
                     </div>
@@ -1334,19 +1939,19 @@
                     <div class="visita-subtitle">☀️ Domingo Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('san siro.jpg')">
-                            <img src="./san siro.jpg" alt="San Siro" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESan Siro%3C/text%3E%3C/svg%3E'">
+                            <img src="./san siro.jpg" alt="San Siro" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">San Siro</div>
                         </div>
                         <div class="image-card" onclick="openImage('san siro 2.jpg')">
-                            <img src="./san siro 2.jpg" alt="San Siro 2" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESan Siro 2%3C/text%3E%3C/svg%3E'">
+                            <img src="./san siro 2.jpg" alt="San Siro 2" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">San Siro 2</div>
                         </div>
                         <div class="image-card" onclick="openImage('san siro 3.jpg')">
-                            <img src="./san siro 3.jpg" alt="San Siro 3" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESan Siro 3%3C/text%3E%3C/svg%3E'">
+                            <img src="./san siro 3.jpg" alt="San Siro 3" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">San Siro 3</div>
                         </div>
                         <div class="image-card" onclick="openImage('san siro 4.jpg')">
-                            <img src="./san siro 4.jpg" alt="San Siro 4" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESan Siro 4%3C/text%3E%3C/svg%3E'">
+                            <img src="./san siro 4.jpg" alt="San Siro 4" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">San Siro 4</div>
                         </div>
                     </div>
@@ -1357,30 +1962,30 @@
                     <div class="visita-subtitle">🌆 Domingo Tarde</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('santa maria delle grazie.jpg')">
-                            <img src="./santa maria delle grazie.jpg" alt="Santa Maria delle Grazie" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ESanta Maria delle Grazie%3C/text%3E%3C/svg%3E'">
+                            <img src="./santa maria delle grazie.jpg" alt="Santa Maria delle Grazie" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Santa Maria delle Grazie</div>
                         </div>
                         <div class="image-card" onclick="openImage('basilica-san-ambrosio.jpg')">
-                            <img src="./basilica-san-ambrosio.jpg" alt="Basílica San Ambrosio" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBasílica San Ambrosio%3C/text%3E%3C/svg%3E'">
+                            <img src="./basilica-san-ambrosio.jpg" alt="Basílica San Ambrosio" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Basílica San Ambrosio</div>
                         </div>
                         <div class="image-card" onclick="openImage('basilica de san lorenzo.jpg')">
-                            <img src="./basilica de san lorenzo.jpg" alt="Basílica de San Lorenzo" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EBasílica de San Lorenzo%3C/text%3E%3C/svg%3E'">
+                            <img src="./basilica de san lorenzo.jpg" alt="Basílica de San Lorenzo" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Basílica de San Lorenzo</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="visita-content" id="lunes-manana">
-                    <button class="back-btn" onclick="backToVisitas()">️ Volver</button>
+                    <button class="back-btn" onclick="backToVisitas()">⬅️ Volver</button>
                     <div class="visita-subtitle">🌄 Lunes Mañana</div>
                     <div class="images-grid">
                         <div class="image-card" onclick="openImage('pinacoteca ambrosiana.jpg')">
-                            <img src="./pinacoteca ambrosiana.jpg" alt="Pinacoteca Ambrosiana" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3EPinacoteca Ambrosiana%3C/text%3E%3C/svg%3E'">
+                            <img src="./pinacoteca ambrosiana.jpg" alt="Pinacoteca Ambrosiana" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Pinacoteca Ambrosiana</div>
                         </div>
                         <div class="image-card" onclick="openImage('cripta.jpg')">
-                            <img src="./cripta.jpg" alt="Cripta" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22300%22 height=%22150%22%3E%3Crect fill=%22%23ddd%22 width=%22300%22 height=%22150%22/%3E%3Ctext fill=%22%23666%22 x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22%3ECripta%3C/text%3E%3C/svg%3E'">
+                            <img src="./cripta.jpg" alt="Cripta" onerror="this.style.background='#ddd'; this.style.height='150px'">
                             <div class="image-name">Cripta</div>
                         </div>
                     </div>
@@ -1395,14 +2000,81 @@
 
         <div class="content-section" id="checklist">
             <h2 class="section-title">✅ Checklist - Equipaje</h2>
-            
             <div class="weather-info">
                 <h3>🌡️ Clima en Milán (Octubre)</h3>
                 <div class="weather-temp">12°C - 19°C</div>
                 <p>Noches frescas (~10°C) • Posibilidad de lluvia</p>
             </div>
-
             <div class="checklist-container" id="checklistContainer"></div>
+        </div>
+    </div>
+
+    <button class="emergency-fab" onclick="openEmergencyModal()" title="Números de emergencia">🚨</button>
+
+    <div class="emergency-modal" id="emergencyModal">
+        <div class="emergency-modal-content">
+            <button class="emergency-close" onclick="closeEmergencyModal()">×</button>
+            <h2>🚨 Números de Emergencia</h2>
+            
+            <div class="emergency-item important">
+                <div class="emergency-icon">🇪🇺</div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Emergencias UE</div>
+                    <div class="emergency-number">112</div>
+                </div>
+                <a href="tel:112" class="emergency-call-btn"> Llamar</a>
+            </div>
+
+            <div class="emergency-item important">
+                <div class="emergency-icon">🚑</div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Ambulancia</div>
+                    <div class="emergency-number">118</div>
+                </div>
+                <a href="tel:118" class="emergency-call-btn">📞 Llamar</a>
+            </div>
+
+            <div class="emergency-item important">
+                <div class="emergency-icon">👮</div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Policía (Polizia di Stato)</div>
+                    <div class="emergency-number">113</div>
+                </div>
+                <a href="tel:113" class="emergency-call-btn">📞 Llamar</a>
+            </div>
+
+            <div class="emergency-item important">
+                <div class="emergency-icon">🚒</div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Bomberos (Vigili del Fuoco)</div>
+                    <div class="emergency-number">115</div>
+                </div>
+                <a href="tel:115" class="emergency-call-btn"> Llamar</a>
+            </div>
+
+            <div class="emergency-item">
+                <div class="emergency-icon">🇪🇸</div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Consulado de España en Milán</div>
+                    <div class="emergency-number" style="font-size: 14px;">+39 02 760 22 700</div>
+                    <div class="emergency-address">
+                        📍 <a href="https://www.google.com/maps/search/?api=1&query=Consulado+de+España+en+Milán+Via+Senato+19+Milano" target="_blank">Via Senato, 19, 20121 Milano</a>
+                    </div>
+                </div>
+                <a href="tel:+390276022700" class="emergency-call-btn">📞 Llamar</a>
+            </div>
+
+            <div class="emergency-item">
+                <div class="emergency-icon"></div>
+                <div class="emergency-info">
+                    <div class="emergency-label">Robo/Pérdida de tarjeta</div>
+                    <div class="emergency-number" style="font-size: 14px;">+34 900 (gratuito)</div>
+                </div>
+            </div>
+
+            <div class="transport-tip" style="margin-top: 15px;">
+                💡 <strong>Importante:</strong> El 112 funciona en toda la UE. Los operadores hablan inglés y pueden derivar a servicios locales.
+            </div>
         </div>
     </div>
 
@@ -1411,9 +2083,7 @@
     <div class="modal-overlay" id="seatModal">
         <div class="modal-content">
             <h3>🎫 Asiento del Autobús</h3>
-            <div id="errorMessage" class="error-message">
-                ⚠️ No se encontró la imagen del asiento.
-            </div>
+            <div id="errorMessage" class="error-message">⚠️ No se encontró la imagen del asiento.</div>
             <img id="seatImage" src="" alt="Asiento ALSA">
             <button class="modal-close" onclick="closeSeatModal()">Cerrar</button>
         </div>
@@ -1424,7 +2094,6 @@
         let currentStep = 1;
         let currentPin = '';
         const targetDate = new Date('2026-10-03T02:15:00').getTime();
-
         const tripOrder = { '0215': 1, '0430': 2, '2300': 3, '0200': 4 };
 
         const googleMapsLinks = {
@@ -1449,52 +2118,46 @@
 
         const documents = [
             { name: 'arturoalsa0200', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
-            { name: 'arturoalsa0215', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
-            { name: 'arturoalsa0430', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
+            { name: 'arturoalsa0215', type: 'PDF', icon: '', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
+            { name: 'arturoalsa0430', type: 'PDF', icon: '', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
             { name: 'arturoalsa2300', type: 'PDF', icon: '🚌', category: 'arturo', transport: 'bus', description: 'Billete ALSA' },
             { name: 'vueloidaarturo', type: 'Imagen JPG', icon: '✈️', category: 'arturo', transport: 'plane', description: 'Vuelo Ida' },
             { name: 'vuelovueltaarturo', type: 'Imagen JPG', icon: '✈️', category: 'arturo', transport: 'plane', description: 'Vuelo Vuelta' },
-            
-            { name: 'danielalsa0200', type: 'PDF', icon: '🚌', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
+            { name: 'danielalsa0200', type: 'PDF', icon: '', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
             { name: 'danielalsa0215', type: 'PDF', icon: '🚌', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
-            { name: 'danielalsa0430', type: 'PDF', icon: '🚌', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
+            { name: 'danielalsa0430', type: 'PDF', icon: '', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
             { name: 'danielalsa2300', type: 'PDF', icon: '🚌', category: 'daniel', transport: 'bus', description: 'Billete ALSA' },
             { name: 'vueloidaniel', type: 'Imagen JPG', icon: '✈️', category: 'daniel', transport: 'plane', description: 'Vuelo Ida' },
-            { name: 'vuelovueltadaniel', type: 'Imagen JPG', icon: '✈️', category: 'daniel', transport: 'plane', description: 'Vuelo Vuelta' },
-            
+            { name: 'vuelovueltadaniel', type: 'Imagen JPG', icon: '️', category: 'daniel', transport: 'plane', description: 'Vuelo Vuelta' },
             { name: 'pabloalsa0200', type: 'PDF', icon: '🚌', category: 'pablo', transport: 'bus', description: 'Billete ALSA' },
             { name: 'pabloalsa0215', type: 'PDF', icon: '🚌', category: 'pablo', transport: 'bus', description: 'Billete ALSA' },
-            { name: 'pabloalsa0430', type: 'PDF', icon: '🚌', category: 'pablo', transport: 'bus', description: 'Billete ALSA' },
+            { name: 'pabloalsa0430', type: 'PDF', icon: '', category: 'pablo', transport: 'bus', description: 'Billete ALSA' },
             { name: 'pabloalsa2300', type: 'PDF', icon: '🚌', category: 'pablo', transport: 'bus', description: 'Billete ALSA' },
-            { name: 'vueloidapablo', type: 'Imagen JPG', icon: '✈️', category: 'pablo', transport: 'plane', description: 'Vuelo Ida' },
-            { name: 'vuelovueltapablo', type: 'Imagen JPG', icon: '✈️', category: 'pablo', transport: 'plane', description: 'Vuelo Vuelta' },
-            
+            { name: 'vueloidapablo', type: 'Imagen JPG', icon: '️', category: 'pablo', transport: 'plane', description: 'Vuelo Ida' },
+            { name: 'vuelovueltapablo', type: 'Imagen JPG', icon: '️', category: 'pablo', transport: 'plane', description: 'Vuelo Vuelta' },
             { name: 'vuelo ida', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Ida General' },
-            { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
-            
+            { name: 'vuelo vuelta', type: 'Imagen JPG', icon: '✈️', category: 'general', transport: 'plane', description: 'Vuelo Vuelta General' },
             { name: 'mapa metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
-            { name: 'metro milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
-            { name: 'milan-attractions-map', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Mapa Atracciones' },
-            { name: 'plano milan', type: 'Mapa', icon: '️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
-            
-            { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Basílica' },
+            { name: 'metro milan', type: 'Mapa', icon: '️', category: 'mapas', transport: 'train', description: 'Mapa Metro' },
+            { name: 'milan-attractions-map', type: 'Mapa', icon: '️', category: 'mapas', transport: 'all', description: 'Mapa Atracciones' },
+            { name: 'plano milan', type: 'Mapa', icon: '🗺️', category: 'mapas', transport: 'all', description: 'Plano Ciudad' },
+            { name: 'basilica-san-ambrosio', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'basilica de san lorenzo', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Basílica' },
             { name: 'castillo de los sforza', type: 'Imagen', icon: '🏰', category: 'lugares', transport: 'all', description: 'Castillo' },
             { name: 'cripta', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Cripta' },
             { name: 'duomo milan', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Duomo' },
             { name: 'fachada-san lorenzo-1', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Fachada' },
-            { name: 'palacio real', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palacio' },
+            { name: 'palacio real', type: 'Imagen', icon: '️', category: 'lugares', transport: 'all', description: 'Palacio' },
             { name: 'palazzo reale milan', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Palazzo Reale' },
             { name: 'pinacoteca ambrosiana', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
             { name: 'pinacoteca brera', type: 'Imagen', icon: '🎨', category: 'lugares', transport: 'all', description: 'Pinacoteca' },
             { name: 'san siro', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 2', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'san siro 3', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
-            { name: 'san siro 4', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Estadio' },
+            { name: 'san siro 4', type: 'Imagen', icon: '⚽', category: 'lugares', transport: 'all', description: 'Estadio' },
             { name: 'santa maria delle grazie', type: 'Imagen', icon: '⛪', category: 'lugares', transport: 'all', description: 'Santa Maria' },
-            { name: 'teatro della scala', type: 'Imagen', icon: '', category: 'lugares', transport: 'all', description: 'Teatro' },
+            { name: 'teatro della scala', type: 'Imagen', icon: '🎭', category: 'lugares', transport: 'all', description: 'Teatro' },
             { name: 'terraza duomo', type: 'Imagen', icon: '🏛️', category: 'lugares', transport: 'all', description: 'Terraza' },
-            
             { name: 'index', type: 'Web', icon: '🌐', category: 'otros', transport: 'all', description: 'Index' },
             { name: 'menu', type: 'Web', icon: '📱', category: 'otros', transport: 'all', description: 'Menú' }
         ];
@@ -1578,6 +2241,7 @@
                 { italian: "Ho una prenotazione", spanish: "Tengo una reserva" },
                 { italian: "Una camera singola", spanish: "Una habitación individual" },
                 { italian: "Una camera doppia", spanish: "Una habitación doble" },
+                { italian: "Una camera tripla, per favore", spanish: "Una habitación triple, por favor" },
                 { italian: "Con bagno", spanish: "Con baño" },
                 { italian: "La chiave della camera", spanish: "La llave de la habitación" },
                 { italian: "A che ora è la colazione?", spanish: "¿A qué hora es el desayuno?" },
@@ -1623,54 +2287,58 @@
         };
 
         const checklistItems = [
-            {
-                category: "Documentación",
-                items: ["DNI o Pasaporte", "Tarjeta sanitaria europea", "Tarjetas de crédito/débito", "Efectivo (euros)", "Billetes en el móvil"]
-            },
-            {
-                category: "Ropa (mínima)",
-                items: ["Chaqueta impermeable ligera", "1 Jersey o sudadera", "2-3 Camisetas", "1 Pantalón cómodo", "Ropa interior (3 cambios)", "Calcetines (3 pares)", "Zapatos cómodos para caminar", "Gorro", "Bufanda"]
-            },
-            {
-                category: "Aseo (líquidos <100ml)",
-                items: ["Cepillo de dientes", "Colonia (<100ml)", "Champú (<100ml)", "Medicamentos personales"]
-            },
-            {
-                category: "Electrónica",
-                items: ["Móvil y cargador", "Power bank", "Auriculares"]
-            },
-            {
-                category: "Accesorios",
-                items: ["Paraguas plegable", "Gafas de sol", "Mochila pequeña", "Botella de agua vacía"]
-            }
+            { category: "Documentación", items: ["DNI o Pasaporte", "Tarjeta sanitaria europea", "Tarjetas de crédito/débito", "Efectivo (euros)", "Billetes en el móvil"] },
+            { category: "Ropa (mínima)", items: ["Chaqueta impermeable ligera", "1 Jersey o sudadera", "2-3 Camisetas", "1 Pantalón cómodo", "Ropa interior (3 cambios)", "Calcetines (3 pares)", "Zapatos cómodos para caminar", "Gorro", "Bufanda"] },
+            { category: "Aseo (líquidos <100ml)", items: ["Cepillo de dientes", "Colonia (<100ml)", "Champú (<100ml)", "Medicamentos personales"] },
+            { category: "Electrónica", items: ["Móvil y cargador", "Power bank", "Auriculares"] },
+            { category: "Accesorios", items: ["Paraguas plegable", "Gafas de sol", "Mochila pequeña", "Botella de agua vacía"] }
         ];
 
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const btn = document.querySelector('.theme-toggle');
+            btn.textContent = document.body.classList.contains('dark-mode') ? '☀️' : '🌙';
+            localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
+        }
+
+        if (localStorage.getItem('theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+            setTimeout(() => {
+                const btn = document.querySelector('.theme-toggle');
+                if (btn) btn.textContent = '☀️';
+            }, 100);
+        }
+
+        function openEmergencyModal() {
+            document.getElementById('emergencyModal').classList.add('active');
+        }
+
+        function closeEmergencyModal() {
+            document.getElementById('emergencyModal').classList.remove('active');
+        }
+
+        document.getElementById('emergencyModal').addEventListener('click', function(e) {
+            if (e.target === this) closeEmergencyModal();
+        });
+
         function pressKey(key) {
-            if (key === 'delete') {
-                currentPin = currentPin.slice(0, -1);
-            } else if (key === 'ok') {
-                if (currentPin.length === 4) verifyCode();
-            } else {
-                if (currentPin.length < 4) currentPin += key;
-            }
+            if (key === 'delete') { currentPin = currentPin.slice(0, -1); }
+            else if (key === 'ok') { if (currentPin.length === 4) verifyCode(); }
+            else { if (currentPin.length < 4) currentPin += key; }
             updatePinDisplay();
         }
 
         function updatePinDisplay() {
-            const dots = document.querySelectorAll('.pin-dot');
-            dots.forEach((dot, index) => {
+            document.querySelectorAll('.pin-dot').forEach((dot, index) => {
                 dot.classList.toggle('filled', index < currentPin.length);
             });
         }
 
         function verifyCode() {
             const errorMsg = document.getElementById('errorMsg');
-            
             if (currentStep === 1) {
                 if (currentPin === validCodes.first) {
-                    currentStep = 2;
-                    currentPin = '';
-                    updatePinDisplay();
+                    currentStep = 2; currentPin = ''; updatePinDisplay();
                     document.getElementById('stepDot1').classList.remove('active');
                     document.getElementById('stepDot1').classList.add('completed');
                     document.getElementById('stepDot2').classList.add('active');
@@ -1679,8 +2347,7 @@
                 } else {
                     errorMsg.textContent = 'Código incorrecto. Intenta de nuevo.';
                     errorMsg.style.display = 'block';
-                    currentPin = '';
-                    updatePinDisplay();
+                    currentPin = ''; updatePinDisplay();
                     setTimeout(() => errorMsg.style.display = 'none', 3000);
                 }
             } else {
@@ -1695,36 +2362,27 @@
                 } else {
                     errorMsg.textContent = 'Código incorrecto. Intenta de nuevo.';
                     errorMsg.style.display = 'block';
-                    currentPin = '';
-                    updatePinDisplay();
+                    currentPin = ''; updatePinDisplay();
                     setTimeout(() => errorMsg.style.display = 'none', 3000);
                 }
             }
         }
 
         function initApp() {
-            renderDocuments();
-            renderPhrases();
-            renderChecklist();
-            updateCountdown();
-            fetchMilanWeather();
+            renderDocuments(); renderPhrases(); renderChecklist();
+            updateCountdown(); fetchMilanWeather();
             setInterval(updateCountdown, 1000);
         }
 
         async function fetchMilanWeather() {
             const weatherDisplay = document.getElementById('weatherDisplay');
-            
             try {
                 const response = await fetch('https://api.open-meteo.com/v1/forecast?latitude=45.4642&longitude=9.1900&current=temperature_2m,weather_code&timezone=Europe/Rome');
                 const data = await response.json();
-                
                 const temp = Math.round(data.current.temperature_2m);
-                const weatherCode = data.current.weather_code;
-                const weatherInfo = getWeatherInfo(weatherCode);
-                
+                const weatherInfo = getWeatherInfo(data.current.weather_code);
                 const now = new Date();
                 const timeString = now.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
-                
                 weatherDisplay.innerHTML = `
                     <span class="weather-icon">${weatherInfo.icon}</span>
                     <div>
@@ -1735,16 +2393,12 @@
                     <div class="weather-timestamp">Actualizado: ${timeString}</div>
                 `;
             } catch (error) {
-                console.error('Error fetching weather:', error);
                 weatherDisplay.innerHTML = `
-                    <span class="weather-icon">🌡️</span>
-                    <div>
-                        <div class="weather-temp">--°C</div>
-                        <div class="weather-location">Milán</div>
-                    </div>
+                    <span class="weather-icon">️</span>
+                    <div><div class="weather-temp">--°C</div><div class="weather-location">Milán</div></div>
                     <button class="weather-refresh" onclick="refreshWeather(event)" title="Reintentar">🔄</button>
                 `;
-                showToast(' Error al cargar el clima', 'error');
+                showToast('❌ Error al cargar el clima', 'error');
             }
         }
 
@@ -1766,11 +2420,11 @@
 
         function getWeatherInfo(code) {
             const weatherCodes = {
-                0: { icon: '☀️' }, 1: { icon: '️' }, 2: { icon: '️' }, 3: { icon: '️' },
-                45: { icon: '🌫️' }, 48: { icon: '🌫️' }, 51: { icon: '🌦️' }, 53: { icon: '🌦️' },
-                55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '🌧️' }, 65: { icon: '🌧️' },
-                71: { icon: '🌨️' }, 73: { icon: '️' }, 75: { icon: '❄️' },
-                95: { icon: '⛈️' }, 96: { icon: '⛈️' }, 99: { icon: '⛈️' }
+                0: { icon: '☀️' }, 1: { icon: '🌤️' }, 2: { icon: '☁️' }, 3: { icon: '☁️' },
+                45: { icon: '🌫️' }, 48: { icon: '️' }, 51: { icon: '🌦️' }, 53: { icon: '🌦️' },
+                55: { icon: '🌧️' }, 61: { icon: '🌧️' }, 63: { icon: '️' }, 65: { icon: '🌧️' },
+                71: { icon: '🌨️' }, 73: { icon: '🌨️' }, 75: { icon: '❄️' },
+                95: { icon: '️' }, 96: { icon: '⛈️' }, 99: { icon: '⛈️' }
             };
             return weatherCodes[code] || { icon: '🌡️' };
         }
@@ -1781,7 +2435,6 @@
             toast.className = `toast ${type}`;
             toast.textContent = message;
             container.appendChild(toast);
-            
             setTimeout(() => {
                 toast.style.animation = 'slideDown 0.3s ease';
                 setTimeout(() => toast.remove(), 300);
@@ -1791,13 +2444,11 @@
         function updateCountdown() {
             const now = new Date().getTime();
             const distance = targetDate - now;
-
             if (distance > 0) {
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
                 document.getElementById('days').textContent = String(days).padStart(2, '0');
                 document.getElementById('hours').textContent = String(hours).padStart(2, '0');
                 document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
@@ -1814,12 +2465,12 @@
 
         function openWebcam() {
             window.open('https://www.skylinewebcams.com/es/webcam/italia/lombardia/milano/duomo-milano.html', '_blank');
-            showToast('📹 Abriendo webcam en vivo...', 'info');
+            showToast(' Abriendo webcam en vivo...', 'info');
         }
 
         function openFile(fileName) {
             window.open('./' + fileName, '_blank');
-            showToast(` Abriendo ${fileName}...`, 'info');
+            showToast(`📂 Abriendo ${fileName}...`, 'info');
         }
 
         function openImage(fileName) {
@@ -1830,12 +2481,7 @@
         function showVisita(visitaId) {
             document.querySelectorAll('.visita-content').forEach(c => c.classList.remove('active'));
             document.getElementById(visitaId).classList.add('active');
-            const titles = {
-                'sabado-tarde': 'Sábado Tarde',
-                'domingo-manana': 'Domingo Mañana',
-                'domingo-tarde': 'Domingo Tarde',
-                'lunes-manana': 'Lunes Mañana'
-            };
+            const titles = { 'sabado-tarde': 'Sábado Tarde', 'domingo-manana': 'Domingo Mañana', 'domingo-tarde': 'Domingo Tarde', 'lunes-manana': 'Lunes Mañana' };
             showToast(`🏛️ Mostrando: ${titles[visitaId]}`, 'success');
         }
 
@@ -1846,195 +2492,91 @@
 
         function openGoogleMaps(suffix) {
             const link = googleMapsLinks[suffix];
-            if (link) {
-                window.open(link, '_blank');
-                showToast('📍 Abriendo ubicación en Google Maps...', 'info');
-            }
+            if (link) { window.open(link, '_blank'); showToast('📍 Abriendo ubicación en Google Maps...', 'info'); }
         }
 
         function openSeatModal(seatNumber) {
             const modal = document.getElementById('seatModal');
             const img = document.getElementById('seatImage');
             const errorMsg = document.getElementById('errorMessage');
-            
-            img.classList.remove('error');
-            errorMsg.classList.remove('show');
-            
+            img.classList.remove('error'); errorMsg.classList.remove('show');
             const imagePath = `./alsa${seatNumber}.jpg`;
-            img.src = imagePath;
-            img.alt = `Asiento ${seatNumber} ALSA`;
-            
-            img.onerror = function() {
-                img.classList.add('error');
-                errorMsg.classList.add('show');
-                showToast('⚠️ No se encontró la imagen del asiento', 'error');
-            };
-            
-            img.onload = function() {
-                showToast(`🎫 Asiento ${seatNumber} cargado`, 'success');
-            };
-            
+            img.src = imagePath; img.alt = `Asiento ${seatNumber} ALSA`;
+            img.onerror = function() { img.classList.add('error'); errorMsg.classList.add('show'); showToast('⚠️ No se encontró la imagen del asiento', 'error'); };
+            img.onload = function() { showToast(` Asiento ${seatNumber} cargado`, 'success'); };
             modal.classList.add('active');
         }
 
-        function closeSeatModal() {
-            document.getElementById('seatModal').classList.remove('active');
-        }
+        function closeSeatModal() { document.getElementById('seatModal').classList.remove('active'); }
+        document.getElementById('seatModal').addEventListener('click', function(e) { if (e.target === this) closeSeatModal(); });
 
-        document.getElementById('seatModal').addEventListener('click', function(e) {
-            if (e.target === this) closeSeatModal();
-        });
-
-        function getTripOrder(docName) {
-            const match = docName.match(/(\d{4})$/);
-            if (match) return tripOrder[match[1]] || 999;
-            return 999;
-        }
-
-        function getTripSuffix(docName) {
-            const match = docName.match(/(\d{4})$/);
-            return match ? match[1] : null;
-        }
+        function getTripOrder(docName) { const match = docName.match(/(\d{4})$/); if (match) return tripOrder[match[1]] || 999; return 999; }
+        function getTripSuffix(docName) { const match = docName.match(/(\d{4})$/); return match ? match[1] : null; }
 
         function applyFilters() {
             const travelerFilter = document.getElementById('travelerFilter').value;
             const transportFilter = document.getElementById('transportFilter').value;
-            
             let filteredDocs = documents;
-            
-            if (travelerFilter) {
-                filteredDocs = filteredDocs.filter(doc => doc.category === travelerFilter);
-            }
-            
-            if (transportFilter) {
-                filteredDocs = filteredDocs.filter(doc => doc.transport === transportFilter || doc.transport === 'all');
-            }
-            
+            if (travelerFilter) filteredDocs = filteredDocs.filter(doc => doc.category === travelerFilter);
+            if (transportFilter) filteredDocs = filteredDocs.filter(doc => doc.transport === transportFilter || doc.transport === 'all');
             filteredDocs.sort((a, b) => getTripOrder(a.name) - getTripOrder(b.name));
-            
-            // Show/hide train info container
             const trainInfoContainer = document.getElementById('trainInfoContainer');
-            if (transportFilter === 'train') {
-                trainInfoContainer.style.display = 'block';
-            } else {
-                trainInfoContainer.style.display = 'none';
-            }
-            
-            if (!travelerFilter || !transportFilter) {
-                document.getElementById('filterInfo').innerHTML = 'Selecciona un viajero y tipo de transporte para ver los documentos';
-            } else {
+            if (transportFilter === 'train') trainInfoContainer.style.display = 'block';
+            else trainInfoContainer.style.display = 'none';
+            if (!travelerFilter || !transportFilter) document.getElementById('filterInfo').innerHTML = 'Selecciona un viajero y tipo de transporte para ver los documentos';
+            else {
                 const transportText = transportFilter === 'bus' ? 'autobús' : transportFilter === 'train' ? 'tren' : 'avión';
-                document.getElementById('filterInfo').innerHTML = 
-                    `Mostrando <strong>${filteredDocs.length} documentos</strong> de <strong>${travelerFilter}</strong> en <strong>${transportText}</strong>`;
+                document.getElementById('filterInfo').innerHTML = `Mostrando <strong>${filteredDocs.length} documentos</strong> de <strong>${travelerFilter}</strong> en <strong>${transportText}</strong>`;
             }
-            
             renderDocuments(filteredDocs);
         }
 
         function closeTrainInfo() {
-            const trainInfoContainer = document.getElementById('trainInfoContainer');
-            trainInfoContainer.style.display = 'none';
-            showToast('ℹ️ Información de tren cerrada', 'info', 2000);
+            document.getElementById('trainInfoContainer').style.display = 'none';
+            showToast('️ Información de tren cerrada', 'info', 2000);
         }
 
         function renderSchedule(schedule) {
             const parts = schedule.split(' - ');
-            if (parts.length === 2) {
-                return `<span class="schedule-departure">${parts[0].trim()}</span><span class="schedule-separator"> - </span><span class="schedule-arrival">${parts[1].trim()}</span>`;
-            }
+            if (parts.length === 2) return `<span class="schedule-departure">${parts[0].trim()}</span><span class="schedule-separator"> - </span><span class="schedule-arrival">${parts[1].trim()}</span>`;
             return schedule;
         }
 
         function renderDocuments(docsToRender = documents) {
             const grid = document.getElementById('documentsGrid');
             grid.innerHTML = '';
-            
             const travelerFilter = document.getElementById('travelerFilter').value;
             const transportFilter = document.getElementById('transportFilter').value;
-            
-            if (!travelerFilter || !transportFilter || docsToRender.length === 0) {
-                grid.innerHTML = '';
-                return;
-            }
-            
+            if (!travelerFilter || !transportFilter || docsToRender.length === 0) { grid.innerHTML = ''; return; }
             if (transportFilter === 'plane') {
                 const baggageCard = document.createElement('div');
                 baggageCard.className = 'baggage-card';
-                baggageCard.innerHTML = `
-                    <div class="baggage-title"> Medidas Mochila</div>
-                    <img src="./40x30x20.jpg" alt="Medidas mochila permitida" onerror="this.style.display='none'">
-                    <div class="baggage-measures">40 x 30 x 20 cm</div>
-                `;
+                baggageCard.innerHTML = `<div class="baggage-title">🎒 Medidas Mochila</div><img src="./40x30x20.jpg" alt="Medidas mochila permitida" onerror="this.style.display='none'"><div class="baggage-measures">40 x 30 x 20 cm</div>`;
                 grid.appendChild(baggageCard);
             }
-            
             docsToRender.forEach((doc) => {
                 const card = document.createElement('div');
                 card.className = `doc-card ${doc.transport}`;
-                
-                const transportBadge = doc.transport === 'bus' ? '<span class="transport-badge bus">Autobús</span>' : 
-                                      doc.transport === 'train' ? '<span class="transport-badge train">Tren</span>' : 
-                                      doc.transport === 'plane' ? '<span class="transport-badge plane">Avión</span>' : '';
-                
+                const transportBadge = doc.transport === 'bus' ? '<span class="transport-badge bus">Autobús</span>' : doc.transport === 'train' ? '<span class="transport-badge train">Tren</span>' : doc.transport === 'plane' ? '<span class="transport-badge plane">Avión</span>' : '';
                 let cardContent = '';
-                
                 if (doc.transport === 'bus') {
                     const suffix = getTripSuffix(doc.name);
                     const tripInfo = busTripInfo[suffix];
                     const seat = seatNumbers[doc.category] ? seatNumbers[doc.category][suffix] : null;
-                    
                     let extraInfo = '';
-                    if (tripInfo) {
-                        extraInfo = `
-                            <div class="doc-route" onclick="openGoogleMaps('${suffix}')">📍 ${tripInfo.route}</div>
-                            <div class="doc-schedule">🕐 ${renderSchedule(tripInfo.schedule)}</div>
-                            ${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})">🎫 Asiento ${seat}</div>` : ''}
-                        `;
-                    }
-                    
-                    cardContent = `
-                        <div class="doc-icon">${doc.icon || '🚌'}</div>
-                        <div class="doc-name">${transportBadge}</div>
-                        ${extraInfo}
-                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
-                    `;
+                    if (tripInfo) extraInfo = `<div class="doc-route" onclick="openGoogleMaps('${suffix}')">📍 ${tripInfo.route}</div><div class="doc-schedule">🕐 ${renderSchedule(tripInfo.schedule)}</div>${seat ? `<div class="doc-seat" onclick="openSeatModal(${seat})">🎫 Asiento ${seat}</div>` : ''}`;
+                    cardContent = `<div class="doc-icon">${doc.icon || '🚌'}</div><div class="doc-name">${transportBadge}</div>${extraInfo}<button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>`;
                 } else if (doc.transport === 'plane') {
                     const isIda = doc.name.toLowerCase().includes('ida');
                     const routeText = isIda ? 'Barajas - Malpensa' : 'Malpensa - Barajas';
-                    const routeLink = isIda 
-                        ? 'https://www.google.com/maps/place/Terminal+T2+Salidas,+Barajas,+28042+Madrid/@40.4674407,-3.5730472,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231cffa6e09e9:0xb34f6be64e3dfb62!8m2!3d40.4674407!4d-3.5704723!16s%2Fg%2F11h22bfldp?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D'
-                        : 'https://www.google.com/maps/place/Malpensa+Aeroporto+T1/@45.6271487,8.7087151,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786611293e8fd07:0x59bcfa695ed94c05!8m2!3d45.6271487!4d8.71129!16s%2Fg%2F11bc60br7p?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D';
-                    
+                    const routeLink = isIda ? 'https://www.google.com/maps/place/Terminal+T2+Salidas,+Barajas,+28042+Madrid/@40.4674407,-3.5730472,663m/data=!3m2!1e3!4b1!4m6!3m5!1s0xd4231cffa6e09e9:0xb34f6be64e3dfb62!8m2!3d40.4674407!4d-3.5704723!16s%2Fg%2F11h22bfldp?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D' : 'https://www.google.com/maps/place/Malpensa+Aeroporto+T1/@45.6271487,8.7087151,609m/data=!3m2!1e3!4b1!4m6!3m5!1s0x4786611293e8fd07:0x59bcfa695ed94c05!8m2!3d45.6271487!4d8.71129!16s%2Fg%2F11bc60br7p?entry=ttu&g_ep=EgoyMDI2MDgxNy4wIKXMDSoASAFQAw%3D%3D';
                     let scheduleHtml = '';
-                    if (isIda) {
-                        scheduleHtml = `
-                            <div class="doc-schedule">🕐 Salida Barajas: <span class="schedule-departure">09:55</span></div>
-                            <div class="doc-schedule">🕐 Llegada Milán: <span class="schedule-arrival">12:10</span></div>
-                        `;
-                    } else {
-                        // VUELTA - con llegada a Madrid incluida
-                        scheduleHtml = `
-                            <div class="doc-schedule">🕐 Salida Milán: <span class="schedule-departure">16:25</span></div>
-                            <div class="doc-schedule">🕐 Salida vuelo: <span class="schedule-departure">19:30</span></div>
-                            <div class="doc-schedule">🕐 Llegada Madrid: <span class="schedule-arrival">22:00</span></div>
-                        `;
-                    }
-                    
-                    cardContent = `
-                        <div class="doc-icon">${doc.icon || '✈️'}</div>
-                        <div class="doc-name">${transportBadge}</div>
-                        <div class="doc-route" onclick="window.open('${routeLink}', '_blank')">📍 ${routeText}</div>
-                        ${scheduleHtml}
-                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
-                    `;
+                    if (isIda) scheduleHtml = `<div class="doc-schedule">🕐 Salida Barajas: <span class="schedule-departure">09:55</span></div><div class="doc-schedule">🕐 Llegada Milán: <span class="schedule-arrival">12:10</span></div>`;
+                    else scheduleHtml = `<div class="doc-schedule">🕐 Salida Milán: <span class="schedule-departure">16:25</span></div><div class="doc-schedule">🕐 Salida vuelo: <span class="schedule-departure">19:30</span></div><div class="doc-schedule">🕐 Llegada Madrid: <span class="schedule-arrival">22:00</span></div>`;
+                    cardContent = `<div class="doc-icon">${doc.icon || '✈️'}</div><div class="doc-name">${transportBadge}</div><div class="doc-route" onclick="window.open('${routeLink}', '_blank')">📍 ${routeText}</div>${scheduleHtml}<button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>`;
                 } else {
-                    cardContent = `
-                        <div class="doc-icon">${doc.icon || ''}</div>
-                        <div class="doc-name">${doc.name} ${transportBadge}</div>
-                        <button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>
-                    `;
+                    cardContent = `<div class="doc-icon">${doc.icon || ''}</div><div class="doc-name">${doc.name} ${transportBadge}</div><button class="download-btn" onclick="downloadFile('${doc.name}', this)">Descargar</button>`;
                 }
-                
                 card.innerHTML = cardContent;
                 grid.appendChild(card);
             });
@@ -2044,116 +2586,53 @@
             const isFlight = docName.toLowerCase().includes('vuelo');
             const extension = isFlight ? '.jpg' : '.pdf';
             const fileName = docName.endsWith(extension) ? docName : docName + extension;
-            
-            btn.classList.add('downloading');
-            btn.textContent = '⏳ Descargando...';
-            
+            btn.classList.add('downloading'); btn.textContent = '⏳ Descargando...';
             try {
                 const filePath = './' + fileName;
                 window.open(filePath, '_blank');
                 showToast(`✅ ${fileName} descargado`, 'success');
-                
-                setTimeout(() => {
-                    btn.classList.remove('downloading');
-                    btn.textContent = 'Descargar';
-                }, 2000);
-            } catch (error) {
-                showToast('❌ Error al descargar', 'error');
-                btn.classList.remove('downloading');
-                btn.textContent = 'Descargar';
-            }
+                setTimeout(() => { btn.classList.remove('downloading'); btn.textContent = 'Descargar'; }, 2000);
+            } catch (error) { showToast('❌ Error al descargar', 'error'); btn.classList.remove('downloading'); btn.textContent = 'Descargar'; }
         }
 
         function toggleCategory(headerElement) {
             const categoryDiv = headerElement.closest('.phrase-category');
             const content = categoryDiv.querySelector('.phrase-category-content');
             const isActive = headerElement.classList.contains('active');
-            
             document.querySelectorAll('.phrase-category-header').forEach(h => h.classList.remove('active'));
             document.querySelectorAll('.phrase-category-content').forEach(c => c.classList.remove('active'));
-            
-            if (!isActive) {
-                headerElement.classList.add('active');
-                content.classList.add('active');
-            }
+            if (!isActive) { headerElement.classList.add('active'); content.classList.add('active'); }
         }
 
         function renderPhrases() {
             const container = document.getElementById('phrasesContainer');
             container.innerHTML = '';
-            
             const searchInput = document.createElement('input');
-            searchInput.type = 'text';
-            searchInput.className = 'phrase-search';
+            searchInput.type = 'text'; searchInput.className = 'phrase-search';
             searchInput.placeholder = '🔍 Buscar frase...';
             searchInput.addEventListener('input', (e) => {
                 const searchTerm = e.target.value.toLowerCase();
-                document.querySelectorAll('.phrase-item').forEach(item => {
-                    const text = item.textContent.toLowerCase();
-                    item.style.display = text.includes(searchTerm) ? 'flex' : 'none';
-                });
+                document.querySelectorAll('.phrase-item').forEach(item => { item.style.display = item.textContent.toLowerCase().includes(searchTerm) ? 'flex' : 'none'; });
             });
             container.appendChild(searchInput);
-            
-            const categoryIcons = {
-                'Saludos y Cortesía': '',
-                'Presentaciones': '👤',
-                'Transporte y Direcciones': '',
-                'Restaurantes y Comida': '🍝',
-                'Compras': '️',
-                'Alojamiento': '🏨',
-                'Tiempo y Números': '⏰',
-                'Emergencias': '🚨',
-                'Frases Extra': '✨'
-            };
-            
+            const categoryIcons = { 'Saludos y Cortesía': '👋', 'Presentaciones': '👤', 'Transporte y Direcciones': '🚇', 'Restaurantes y Comida': '🍝', 'Compras': '🛍️', 'Alojamiento': '🏨', 'Tiempo y Números': '', 'Emergencias': '🚨', 'Frases Extra': '✨' };
             for (const [category, phrases] of Object.entries(phrasesByCategory)) {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'phrase-category';
-                
-                const header = document.createElement('div');
-                header.className = 'phrase-category-header';
+                const categoryDiv = document.createElement('div'); categoryDiv.className = 'phrase-category';
+                const header = document.createElement('div'); header.className = 'phrase-category-header';
                 header.onclick = function() { toggleCategory(this); };
-                header.innerHTML = `
-                    <div class="category-title">
-                        <span>${categoryIcons[category] || ''}</span>
-                        <span>${category}</span>
-                        <span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 8px; font-size: 12px;">${phrases.length}</span>
-                    </div>
-                    <span class="toggle-icon">▼</span>
-                `;
+                header.innerHTML = `<div class="category-title"><span>${categoryIcons[category] || ''}</span><span>${category}</span><span style="background: rgba(255,255,255,0.2); padding: 2px 8px; border-radius: 8px; font-size: 12px;">${phrases.length}</span></div><span class="toggle-icon">▼</span>`;
                 categoryDiv.appendChild(header);
-                
-                const content = document.createElement('div');
-                content.className = 'phrase-category-content';
-                
+                const content = document.createElement('div'); content.className = 'phrase-category-content';
                 phrases.forEach((phrase) => {
-                    const phraseDiv = document.createElement('div');
-                    phraseDiv.className = 'phrase-item';
-                    
-                    const audioBtn = document.createElement('button');
-                    audioBtn.className = 'audio-btn';
-                    audioBtn.textContent = '🔊 Escuchar';
+                    const phraseDiv = document.createElement('div'); phraseDiv.className = 'phrase-item';
+                    const audioBtn = document.createElement('button'); audioBtn.className = 'audio-btn'; audioBtn.textContent = '🔊 Escuchar';
                     audioBtn.setAttribute('data-phrase', phrase.italian);
-                    audioBtn.onclick = function(e) {
-                        e.stopPropagation();
-                        speakPhrase(this.getAttribute('data-phrase'));
-                    };
-                    
-                    const textDiv = document.createElement('div');
-                    textDiv.className = 'phrase-text';
-                    textDiv.innerHTML = `
-                        <div class="phrase-italian">${phrase.italian}</div>
-                        <div class="phrase-spanish">${phrase.spanish}</div>
-                    `;
-                    
-                    phraseDiv.appendChild(textDiv);
-                    phraseDiv.appendChild(audioBtn);
-                    content.appendChild(phraseDiv);
+                    audioBtn.onclick = function(e) { e.stopPropagation(); speakPhrase(this.getAttribute('data-phrase')); };
+                    const textDiv = document.createElement('div'); textDiv.className = 'phrase-text';
+                    textDiv.innerHTML = `<div class="phrase-italian">${phrase.italian}</div><div class="phrase-spanish">${phrase.spanish}</div>`;
+                    phraseDiv.appendChild(textDiv); phraseDiv.appendChild(audioBtn); content.appendChild(phraseDiv);
                 });
-                
-                categoryDiv.appendChild(content);
-                container.appendChild(categoryDiv);
+                categoryDiv.appendChild(content); container.appendChild(categoryDiv);
             }
         }
 
@@ -2161,32 +2640,20 @@
             if ('speechSynthesis' in window) {
                 speechSynthesis.cancel();
                 const utterance = new SpeechSynthesisUtterance(text);
-                utterance.lang = 'it-IT';
-                utterance.rate = 0.8;
-                utterance.pitch = 1;
-                
+                utterance.lang = 'it-IT'; utterance.rate = 0.8; utterance.pitch = 1;
                 const voices = speechSynthesis.getVoices();
                 const italianVoice = voices.find(v => v.lang.startsWith('it'));
                 if (italianVoice) utterance.voice = italianVoice;
-                
                 speechSynthesis.speak(utterance);
                 showToast(`🔊 Reproduciendo: "${text}"`, 'info', 2000);
-            } else {
-                showToast('❌ Tu navegador no soporta la síntesis de voz', 'error');
-            }
+            } else { showToast('❌ Tu navegador no soporta la síntesis de voz', 'error'); }
         }
 
-        if ('speechSynthesis' in window) {
-            speechSynthesis.onvoiceschanged = function() {
-                speechSynthesis.getVoices();
-            };
-        }
+        if ('speechSynthesis' in window) { speechSynthesis.onvoiceschanged = function() { speechSynthesis.getVoices(); }; }
 
         function saveChecklistState() {
             const checkedItems = [];
-            document.querySelectorAll('.checklist-item input:checked').forEach((checkbox, index) => {
-                checkedItems.push(index);
-            });
+            document.querySelectorAll('.checklist-item input:checked').forEach((checkbox, index) => { checkedItems.push(index); });
             localStorage.setItem('checklistState', JSON.stringify(checkedItems));
         }
 
@@ -2195,10 +2662,7 @@
             if (saved) {
                 const checkedItems = JSON.parse(saved);
                 document.querySelectorAll('.checklist-item input').forEach((checkbox, index) => {
-                    if (checkedItems.includes(index)) {
-                        checkbox.checked = true;
-                        checkbox.parentElement.classList.add('checked');
-                    }
+                    if (checkedItems.includes(index)) { checkbox.checked = true; checkbox.parentElement.classList.add('checked'); }
                 });
                 updateChecklistProgress();
             }
@@ -2208,84 +2672,46 @@
             const total = document.querySelectorAll('.checklist-item').length;
             const completed = document.querySelectorAll('.checklist-item.checked').length;
             const percentage = total > 0 ? Math.round((completed / total) * 100) : 0;
-            
             const progressContainer = document.querySelector('.checklist-progress');
             if (!progressContainer) return;
-            
             const progressBar = progressContainer.querySelector('.checklist-progress-fill');
-            if (progressBar) {
-                progressBar.style.width = `${percentage}%`;
-                progressBar.textContent = `${completed}/${total} (${percentage}%)`;
-            }
+            if (progressBar) { progressBar.style.width = `${percentage}%`; progressBar.textContent = `${completed}/${total} (${percentage}%)`; }
         }
 
         function renderChecklist() {
             const container = document.getElementById('checklistContainer');
             container.innerHTML = '';
-            
-            const progressDiv = document.createElement('div');
-            progressDiv.className = 'checklist-progress';
-            progressDiv.innerHTML = `
-                <div class="checklist-progress-bar">
-                    <div class="checklist-progress-fill" style="width: 0%">0/0 (0%)</div>
-                </div>
-            `;
+            const progressDiv = document.createElement('div'); progressDiv.className = 'checklist-progress';
+            progressDiv.innerHTML = `<div class="checklist-progress-bar"><div class="checklist-progress-fill" style="width: 0%">0/0 (0%)</div></div>`;
             container.appendChild(progressDiv);
-            
             checklistItems.forEach((category, catIndex) => {
-                const catDiv = document.createElement('div');
-                catDiv.className = 'checklist-category';
-                
-                const catTitle = document.createElement('h3');
-                catTitle.textContent = category.category;
+                const catDiv = document.createElement('div'); catDiv.className = 'checklist-category';
+                const catTitle = document.createElement('h3'); catTitle.textContent = category.category;
                 catDiv.appendChild(catTitle);
-                
                 category.items.forEach((item, itemIndex) => {
-                    const itemDiv = document.createElement('div');
-                    itemDiv.className = 'checklist-item';
+                    const itemDiv = document.createElement('div'); itemDiv.className = 'checklist-item';
                     const globalIndex = catIndex * 10 + itemIndex;
-                    itemDiv.innerHTML = `
-                        <input type="checkbox" id="item-${globalIndex}" onchange="toggleCheck(this)">
-                        <label for="item-${globalIndex}">${item}</label>
-                    `;
+                    itemDiv.innerHTML = `<input type="checkbox" id="item-${globalIndex}" onchange="toggleCheck(this)"><label for="item-${globalIndex}">${item}</label>`;
                     catDiv.appendChild(itemDiv);
                 });
-                
                 container.appendChild(catDiv);
             });
-            
             loadChecklistState();
         }
 
         function toggleCheck(checkbox) {
             const item = checkbox.parentElement;
-            if (checkbox.checked) {
-                item.classList.add('checked');
-                showToast('✅ Progreso guardado', 'success', 1500);
-            } else {
-                item.classList.remove('checked');
-            }
-            updateChecklistProgress();
-            saveChecklistState();
+            if (checkbox.checked) { item.classList.add('checked'); showToast('✅ Progreso guardado', 'success', 1500); }
+            else { item.classList.remove('checked'); }
+            updateChecklistProgress(); saveChecklistState();
         }
 
         document.addEventListener('keydown', (e) => {
             if (e.ctrlKey || e.metaKey) {
                 switch(e.key) {
-                    case '1':
-                        e.preventDefault();
-                        showSection('documents', document.querySelector('.nav-btn'));
-                        showToast('⌨️ Atajo: Billetes', 'info', 1500);
-                        break;
-                    case '2':
-                        e.preventDefault();
-                        openWebcam();
-                        break;
-                    case '3':
-                        e.preventDefault();
-                        showSection('phrases', document.querySelectorAll('.nav-btn')[4]);
-                        showToast('⌨️ Atajo: Frases', 'info', 1500);
-                        break;
+                    case '1': e.preventDefault(); showSection('documents', document.querySelector('.nav-btn')); showToast('⌨️ Atajo: Billetes', 'info', 1500); break;
+                    case '2': e.preventDefault(); openWebcam(); break;
+                    case '3': e.preventDefault(); showSection('phrases', document.querySelectorAll('.nav-btn')[4]); showToast('⌨️ Atajo: Frases', 'info', 1500); break;
                 }
             }
         });
